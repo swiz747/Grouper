@@ -41,7 +41,7 @@ public class SignupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.signup, container, false);
+        View view = inflater.inflate(R.layout.signup_layout, container, false);
 
         nameText = (EditText)view.findViewById(R.id.input_name);
         userEmail = (EditText)view.findViewById(R.id.input_email);

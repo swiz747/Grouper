@@ -20,26 +20,27 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tab one"
-                    android:id="@+id/btnOne"/>
+                    android:text="@string/settingsProfile"
+                    android:id="@+id/btnProfile"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tab two"
-                    android:id="@+id/btnTwo"/>
+                    android:text="@string/settingsPrivacy"
+                    android:id="@+id/btnPrivacy"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tab thre"
-                    android:id="@+id/btnThree"/>
+                    android:text="Themes"
+                    android:id="@+id/btnThemes"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tab two"
-                    android:id="@+id/btnFour"/>
+                    android:text="@string/settingsNotifications"
+                    android:textSize="9dp"
+                    android:id="@+id/btnNotifications"/>
 
             </LinearLayout>
 

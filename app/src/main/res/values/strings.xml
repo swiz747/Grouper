@@ -44,4 +44,7 @@
     <string name="profiletextname">PulsatingVagina</string>
     <string name="profiletextheader">Profile</string>
     <string name="refresh">refresh</string>
+    <string name="settingsProfile">Profile</string>
+    <string name="settingsPrivacy">Privacy</string>
+    <string name="settingsNotifications">Notifications</string>
 </resources>
