@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.tritiumlabs.grouper.R;
 
+
 import fragments.FriendsListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean isActive;
 
     Button btnFriendsList;
+    Button btnSettings;
     Button btnLogout;
 
     //TODO Check shared preferences, see if already logged in.
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         btnFriendsList = (Button)findViewById(R.id.btnFriendsList);
+        btnSettings = (Button)findViewById(R.id.btnSettings);
         btnLogout = (Button)findViewById(R.id.btnLogout);
 
         btnFriendsList.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 updatePreferences();
                 openLogin();
                 finish();
+            }
+        });
+
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettings();
             }
         });
     }
@@ -70,5 +80,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("stayLoggedIn", false);
         editor.apply();
+    }
+
+    public void openSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

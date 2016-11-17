@@ -52,6 +52,12 @@
                 android:id="@+id/notificationButton" />
 
             <Button
+                android:text="Settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSettings" />
+
+            <Button
                 android:text="Log out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
