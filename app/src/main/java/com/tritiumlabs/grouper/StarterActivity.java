@@ -33,9 +33,7 @@ public class StarterActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
-        boolean stayLogged = sharedPref.getBoolean("stayLoggedIn", false);
-        if (stayLogged)
-        {
+        if (sharedPref.getBoolean("loginStatus", false)) {
             xmppConnection = MyXMPP.getInstance(this);
             login();
         } else {
@@ -83,8 +81,7 @@ public class StarterActivity extends AppCompatActivity {
             protected void onPostExecute(Boolean result)
             {
                 progressDialog.dismiss();
-                if(result)
-                {
+                if(result) {
                     loginSuccess(name, pass);
                 } else {
                     loginFailed();

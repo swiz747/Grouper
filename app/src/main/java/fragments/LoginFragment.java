@@ -27,7 +27,7 @@ import com.tritiumlabs.grouper.R;
 
 public class LoginFragment extends Fragment {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginFragment";
     private static final int REQUEST_SIGNUP = 0;
     public static MyXMPP xmppConnection;
 
@@ -47,12 +47,9 @@ public class LoginFragment extends Fragment {
         passwordText = (EditText)view.findViewById(R.id.input_password);
         btnLogin = (Button)view.findViewById(R.id.btn_login);
         signupLink = (TextView)view.findViewById(R.id.link_signup);
-
-        //TODO implement these -AB
         rememberPassword = (CheckBox)view.findViewById(R.id.rememberPasswordBox);
         stayLoggedIn = (CheckBox)view.findViewById(R.id.stayLoggedBox);
 
-        //TODO: this is for easy testing because im lazy -AB
         if (getArguments() != null) {
             Bundle userInfo = getArguments();
             if (userInfo.getString("name") != null) {
@@ -62,8 +59,6 @@ public class LoginFragment extends Fragment {
         }
         else
         {
-            //userName.setText("phoneapp");
-            //passwordText.setText("derpass747");
             loadInfo();
         }
 
@@ -183,25 +178,21 @@ public class LoginFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("loginStatus", true);
         editor.putString("username", userName.getText().toString());
         editor.putString("hiddenPass", passwordText.getText().toString());
-        if (rememberPassword.isChecked())
-        {
+
+        if (rememberPassword.isChecked()) {
             editor.putString("password", passwordText.getText().toString());
             editor.putBoolean("rememberPass", true);
-        }
-        else
-        {
+        } else {
             editor.putString("password", null);
             editor.putBoolean("rememberPass", false);
         }
 
-        if (stayLoggedIn.isChecked())
-        {
+        if (stayLoggedIn.isChecked()) {
             editor.putBoolean("stayLoggedIn", true);
-        }
-        else
-        {
+        } else {
             editor.putBoolean("stayLoggedIn", false);
         }
 
@@ -213,17 +204,16 @@ public class LoginFragment extends Fragment {
 
         String name = sharedPref.getString("username", "");
         String pass = sharedPref.getString("password", "");
-        boolean rememberPass = sharedPref.getBoolean("rememberPass", false);
-        boolean stayLogged = sharedPref.getBoolean("stayLoggedIn", false);
         userName.setText(name);
         passwordText.setText(pass);
-        if (rememberPass) {
+
+        if (sharedPref.getBoolean("rememberPass", false)) {
             rememberPassword.setChecked(true);
         } else {
             rememberPassword.setChecked(false);
         }
 
-        if (stayLogged) {
+        if (sharedPref.getBoolean("stayLoggedIn", false)) {
             stayLoggedIn.setChecked(true);
         } else {
             stayLoggedIn.setChecked(false);
