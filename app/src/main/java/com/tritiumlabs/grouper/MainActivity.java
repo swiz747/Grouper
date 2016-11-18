@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void updatePreferences() {
         SharedPreferences sharedPref = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        //editor.putBoolean("stayLoggedIn", false);
         editor.putBoolean("loginStatus", false);
         editor.apply();
     }
