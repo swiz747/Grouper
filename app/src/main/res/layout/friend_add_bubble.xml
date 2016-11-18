@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bubble_layout_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/friend_bubble_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/friendPic"
+            android:src="@drawable/online"
+            />
+        <RelativeLayout
+            android:id="@+id/friend_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/friend_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxEms="12"
+                android:layout_gravity="center"
+                android:text="Dickhead Mcgee"
+                android:textColor="@android:color/primary_text_light" />
+
+            <ImageButton
+                android:id="@+id/addFriendButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/add_button_standard"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
