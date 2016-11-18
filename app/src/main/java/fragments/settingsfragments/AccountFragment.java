@@ -29,10 +29,11 @@ public class AccountFragment extends Fragment {
 
     private static final String TAG = "AccountFragment";
 
-    AccountManager accountManager;
+    AccountManager accountManager = AccountManager.getInstance(MyXMPP.connection);
 
     Button btnChangeEmail;
     Button btnChangePassword;
+    Button btnDeleteAccount;
 
     private String inputText = "";
     private String confirmText = "";
@@ -40,9 +41,12 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings_account_layout, container, false);
 
+        accountManager.sensitiveOperationOverInsecureConnection(true);
+
         //UI objects
         btnChangeEmail = (Button)view.findViewById(R.id.btnChangeEmail);
         btnChangePassword = (Button)view.findViewById(R.id.btnChangePassword);
+        btnDeleteAccount = (Button)view.findViewById(R.id.btnDeleteAccount);
 
         //Listeners
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -59,25 +63,25 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputBox("Enter your current Password:", "deleteaccount");
+            }
+        });
+
         return view;
-    }
-
-    public void changeUsername() {
-
     }
 
     public void changeEmail() {
 
     }
 
-    public void changePassword() {
+    public void manageAccount(final String accountProperty) {
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
 
-        accountManager = AccountManager.getInstance(MyXMPP.connection);
-        accountManager.sensitiveOperationOverInsecureConnection(true);
-
-        AsyncTask<Void, Void, Boolean> signupThread = new AsyncTask<Void, Void, Boolean>() {
+        AsyncTask<Void, Void, Boolean> manageThread = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected void onPreExecute()
             {
@@ -90,11 +94,15 @@ public class AccountFragment extends Fragment {
             @Override
             protected Boolean doInBackground(Void... params) {
 
-                accountManager = AccountManager.getInstance(MyXMPP.connection);
-                accountManager.sensitiveOperationOverInsecureConnection(true);
-
+                //TODO: Password change doesn't affect delete account authentication -KD
+                //TODO: Delete account does not work, error: not-authorized -KD
                 try {
-                    accountManager.changePassword(inputText);
+                    if (accountProperty.equals("passchange")) {
+                        accountManager.changePassword(inputText);
+                    } else if (accountProperty.equals("deleteaccount")) {
+                        accountManager.deleteAccount();
+                        Log.d(TAG, "deleted account maybe?");
+                    }
                 } catch (XMPPException e1) {
                     Log.d(e1.getMessage(), String.valueOf(e1));
                     return false;
@@ -115,7 +123,11 @@ public class AccountFragment extends Fragment {
                 if (result)
                 {
                     Log.d(TAG, inputText);
-                    onPasswordChangeSuccess();
+                    if (accountProperty.equals("passchange")) {
+                        onAccountChangeSuccess("Password Changed", "passchange");
+                    } else if (accountProperty.equals("deleteaccount")) {
+                        onAccountChangeSuccess("Account Deleted", "deleteaccount");
+                    }
                 }
                 else
                 {
@@ -123,13 +135,10 @@ public class AccountFragment extends Fragment {
                 }
             }
         };
-        signupThread.execute();
+        manageThread.execute();
     }
 
-    public void inputBox(String title, String reason) {
-
-        final String boxReason = reason;
-
+    public void inputBox(String title, final String reason) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
 
@@ -144,13 +153,20 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 inputText = input.getText().toString();
-                if (boxReason.equals("emailchange")) {
+                if (reason.equals("emailchange")) {
                     changeEmail();
-                } else if (boxReason.equals("passchange")) {
+                } else if (reason.equals("passchange")) {
                     if (inputText.isEmpty() || inputText.length() < 6 || inputText.length() > 24) {
                         passwordErrorBox("Password must be between 6 and 24 alphanumeric characters.");
                     } else {
                         confirmBox("Confirm Password:", "passconfirm");
+                    }
+                } else if (reason.equals("deleteaccount")) {
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    if (sharedPref.getString("hiddenPass", "").equals(inputText)) {
+                        deleteAccount();
+                    } else {
+                        Toast.makeText(getActivity().getBaseContext(), "Invalid Password", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -165,7 +181,6 @@ public class AccountFragment extends Fragment {
     }
 
     public void confirmBox(String title, String reason) {
-
         final String boxReason = reason;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -184,7 +199,7 @@ public class AccountFragment extends Fragment {
                 confirmText = input.getText().toString();
                 if (boxReason.equals("passconfirm")) {
                     if (confirmText.equals(inputText)) {
-                        changePassword();
+                        manageAccount("passchange");
                     } else {
                         passwordErrorBox("Passwords to not match.");
                     }
@@ -222,16 +237,44 @@ public class AccountFragment extends Fragment {
                     }
                 });
 
-        AlertDialog alert11 = builder.create();
-        alert11.show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    public void onPasswordChangeSuccess() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+    public void deleteAccount() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Are you sure you wish to delete your account?");
+        builder.setCancelable(true);
 
-        editor.putString("password", inputText);
-        editor.apply();
-        Toast.makeText(getActivity().getBaseContext(), "Password Changed", Toast.LENGTH_LONG).show();
+        builder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        manageAccount("deleteaccount");
+                    }
+                });
+
+        builder.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void onAccountChangeSuccess(String message, String type) {
+
+        if (type.equals("passchange")) {
+            SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("password", inputText);
+            editor.apply();
+        }
+        Toast.makeText(getActivity().getBaseContext(), message, Toast.LENGTH_LONG).show();
     }
 }
