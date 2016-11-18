@@ -100,6 +100,11 @@ public class StarterActivity extends AppCompatActivity {
     }
 
     public void loginFailed() {
+        xmppConnection.disconnect();
+        SharedPreferences sharedPref = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("loginStatus", false);
+        editor.apply();
         Toast.makeText(this.getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         openLoginScreen();
     }

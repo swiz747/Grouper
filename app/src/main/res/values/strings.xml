@@ -47,4 +47,5 @@
     <string name="settingsProfile">Profile</string>
     <string name="settingsPrivacy">Privacy</string>
     <string name="settingsNotifications">Notifications</string>
+    <string name="settingsAccount">Account</string>
 </resources>
