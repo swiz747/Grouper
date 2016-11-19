@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class LoginFragment extends Fragment {
 
     EditText userName;
     EditText passwordText;
-    Button btnLogin;
+    ImageButton btnLogin;
     TextView signupLink;
     CheckBox rememberPassword;
     CheckBox stayLoggedIn;
@@ -41,12 +42,12 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_layout, container, false);
+        View view = inflater.inflate(R.layout.pra_newlogin_layout, container, false);
 
-        userName = (EditText)view.findViewById(R.id.input_email);
-        passwordText = (EditText)view.findViewById(R.id.input_password);
-        btnLogin = (Button)view.findViewById(R.id.btn_login);
-        signupLink = (TextView)view.findViewById(R.id.link_signup);
+        userName = (EditText)view.findViewById(R.id.edittxtUsername);
+        passwordText = (EditText)view.findViewById(R.id.edittxtPassword);
+        btnLogin = (ImageButton)view.findViewById(R.id.imgLogin);
+        signupLink = (TextView)view.findViewById(R.id.txtRegisterNow);
         rememberPassword = (CheckBox)view.findViewById(R.id.rememberPasswordBox);
         stayLoggedIn = (CheckBox)view.findViewById(R.id.stayLoggedBox);
 

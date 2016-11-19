@@ -104,12 +104,10 @@ public class SignupFragment extends Fragment {
             @Override
             protected void onPreExecute()
             {
-
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Creating Account...");
                 progressDialog.show();
             }
-
 
             @Override
             protected Boolean doInBackground(Void... params) {
