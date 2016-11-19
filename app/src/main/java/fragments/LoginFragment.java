@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,7 +41,7 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.pra_newlogin_layout, container, false);
+        View view = inflater.inflate(R.layout.login_layout, container, false);
 
         userName = (EditText)view.findViewById(R.id.edittxtUsername);
         passwordText = (EditText)view.findViewById(R.id.edittxtPassword);
@@ -54,7 +53,7 @@ public class LoginFragment extends Fragment {
         if (getArguments() != null) {
             Bundle userInfo = getArguments();
             if (userInfo.getString("name") != null) {
-                EditText someshit = (EditText) view.findViewById(R.id.input_email);
+                EditText someshit = (EditText) view.findViewById(R.id.edittxtUsername);
                 someshit.setText(userInfo.getString("name"));
             }
         }
