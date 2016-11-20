@@ -87,7 +87,6 @@ public class LoginFragment extends Fragment {
         {
             toFragment.setArguments(argsBundle);
         }
-
         getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out, R.animator.zoom_back_out, R.animator.zoom_back_in)
