@@ -52,6 +52,7 @@ public class StarterActivity extends AppCompatActivity {
     public void openLoginScreen() {
             getFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out)
                     .replace(R.id.fragContainer, new LoginFragment())
                     .addToBackStack(null)
                     .commit();

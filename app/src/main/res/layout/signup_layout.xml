@@ -3,117 +3,122 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/res_image_blue_gradient">
+        android:fillViewport="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:id="@+id/imgSignup"
-            android:src="@drawable/signup"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/res_image_blue_gradient">
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:inputType="textPersonName"
-            android:textColor="#0E2165"
-            android:ems="10"
-            android:id="@+id/edittxtUsername"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/blackthickbox"
-            android:paddingStart="10dp"
-            android:layout_below="@+id/imgSignup"
-            android:layout_centerHorizontal="true"
-            android:textCursorDrawable="@null"
-            android:hint="Username" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:id="@+id/imgSignup"
+                android:src="@drawable/signup"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:textCursorDrawable="@null"
-            android:inputType="textPersonName"
-            android:textColor="#0E2165"
-            android:ems="10"
-            android:id="@+id/edittxtEmail"
-            android:background="@drawable/blackthickbox"
-            android:paddingStart="10dp"
-            android:hint="E-mail"
-            android:layout_below="@+id/edittxtUsername"
-            android:layout_alignStart="@+id/edittxtUsername"
-            android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:textColor="#0E2165"
+                android:ems="10"
+                android:id="@+id/edittxtUsername"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blackthickbox"
+                android:paddingStart="10dp"
+                android:layout_below="@+id/imgSignup"
+                android:layout_centerHorizontal="true"
+                android:textCursorDrawable="@null"
+                android:hint="Username" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:textCursorDrawable="@null"
-            android:inputType="textPassword"
-            android:textColor="#0E2165"
-            android:ems="10"
-            android:id="@+id/edittxtPassword"
-            android:hint="Password"
-            android:background="@drawable/blackthickbox"
-            android:paddingStart="10dp"
-            android:layout_below="@+id/edittxtEmail"
-            android:layout_alignStart="@+id/edittxtEmail"
-            android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textCursorDrawable="@null"
+                android:inputType="textPersonName"
+                android:textColor="#0E2165"
+                android:ems="10"
+                android:id="@+id/edittxtEmail"
+                android:background="@drawable/blackthickbox"
+                android:paddingStart="10dp"
+                android:hint="E-mail"
+                android:layout_below="@+id/edittxtUsername"
+                android:layout_alignStart="@+id/edittxtUsername"
+                android:layout_marginTop="20dp" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:textCursorDrawable="@null"
-            android:inputType="textPassword"
-            android:textColor="#0E2165"
-            android:ems="10"
-            android:id="@+id/edittxtPasswordConfirm"
-            android:hint="Confirm Password"
-            android:background="@drawable/blackthickbox"
-            android:paddingStart="10dp"
-            android:layout_below="@+id/edittxtPassword"
-            android:layout_alignStart="@+id/edittxtPassword"
-            android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textCursorDrawable="@null"
+                android:inputType="textPassword"
+                android:textColor="#0E2165"
+                android:ems="10"
+                android:id="@+id/edittxtPassword"
+                android:hint="Password"
+                android:background="@drawable/blackthickbox"
+                android:paddingStart="10dp"
+                android:layout_below="@+id/edittxtEmail"
+                android:layout_alignStart="@+id/edittxtEmail"
+                android:layout_marginTop="20dp" />
 
-        <CheckBox
-            android:text="Agree to Terms of Service"
-            android:textColor="#0E2165"
-            android:layout_marginTop="5sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/primary_darker"
-            android:layout_below="@+id/edittxtPasswordConfirm"
-            android:layout_alignStart="@+id/edittxtPasswordConfirm"
-            android:id="@+id/chkAgreetoTOS" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textCursorDrawable="@null"
+                android:inputType="textPassword"
+                android:textColor="#0E2165"
+                android:ems="10"
+                android:id="@+id/edittxtPasswordConfirm"
+                android:hint="Confirm Password"
+                android:background="@drawable/blackthickbox"
+                android:paddingStart="10dp"
+                android:layout_below="@+id/edittxtPassword"
+                android:layout_alignStart="@+id/edittxtPassword"
+                android:layout_marginTop="20dp" />
 
-        <ImageButton
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:scaleType="fitXY"
-            android:id="@+id/imgbtnRegister"
-            android:layout_marginTop="15sp"
-            android:src="@drawable/registerselector"
-            android:background="@android:color/transparent"
-            android:layout_below="@+id/chkAgreetoTOS"
-            android:layout_centerHorizontal="true" />
+            <CheckBox
+                android:text="Agree to Terms of Service"
+                android:textColor="#0E2165"
+                android:layout_marginTop="5sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/primary_darker"
+                android:layout_below="@+id/edittxtPasswordConfirm"
+                android:layout_alignStart="@+id/edittxtPasswordConfirm"
+                android:id="@+id/chkAgreetoTOS" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Already a member? Click here to login!"
-            android:id="@+id/txtLogin"
-            android:layout_below="@+id/imgbtnRegister"
-            android:layout_centerInParent="true"
-            android:textColor="#0E2165"
-            android:layout_marginTop="20dp"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imgbtnRegister"
+                android:layout_marginTop="15sp"
+                android:src="@drawable/registerselector"
+                android:background="@android:color/transparent"
+                android:layout_below="@+id/chkAgreetoTOS"
+                android:layout_centerHorizontal="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Already a member? Click here to login!"
+                android:id="@+id/txtLogin"
+                android:layout_below="@+id/imgbtnRegister"
+                android:layout_centerInParent="true"
+                android:textColor="#0E2165"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
