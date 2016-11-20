@@ -73,20 +73,25 @@ public class LoginFragment extends Fragment {
         signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test();
+                openSignupScreen(null);
             }
         });
 
         return view;
     }
 
-    public void test() {
+    public void openSignupScreen(@Nullable Bundle argsBundle) {
+
+        Fragment toFragment = new SignupFragment();
+        if (argsBundle != null)
+        {
+            toFragment.setArguments(argsBundle);
+        }
 
         getFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.animator.zoom_in,
-                        R.animator.zoom_out)
-                .replace(R.id.fragContainer, new SignupFragment())
+                .setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out, R.animator.zoom_back_out, R.animator.zoom_back_in)
+                .replace(R.id.fragContainer, toFragment)
                 .addToBackStack(null)
                 .commit();
     }

@@ -37,7 +37,7 @@ public class StarterActivity extends AppCompatActivity {
             xmppConnection = MyXMPP.getInstance(this);
             login();
         } else {
-            test();
+            openLoginScreen();
         }
     }
 
@@ -49,7 +49,7 @@ public class StarterActivity extends AppCompatActivity {
     }
     */
 
-    public void test() {
+    public void openLoginScreen() {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragContainer, new LoginFragment())
@@ -116,6 +116,6 @@ public class StarterActivity extends AppCompatActivity {
         editor.putBoolean("loginStatus", false);
         editor.apply();
         Toast.makeText(this.getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-        test();
+        openLoginScreen();
     }
 }
