@@ -11,49 +11,39 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imgWelcomeHeader"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/imgSignup"
+            android:src="@drawable/signup"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/fheaderwelcome" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Grouper Registration"
-            android:id="@+id/imgRegisterHeader"
-            android:layout_below="@+id/imgWelcomeHeader"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textSize="30sp"
-            android:textColor="#0E2165"
-            android:textStyle="bold" />
+            android:layout_centerHorizontal="true" />
 
         <EditText
             android:layout_width="300dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:textColor="#0E2165"
             android:ems="10"
             android:id="@+id/edittxtUsername"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/blackthickbox"
-            android:paddingStart="5dp"
-            android:layout_below="@+id/imgRegisterHeader"
+            android:paddingStart="10dp"
+            android:layout_below="@+id/imgSignup"
             android:layout_centerHorizontal="true"
             android:textCursorDrawable="@null"
             android:hint="Username" />
 
         <EditText
             android:layout_width="300dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:textCursorDrawable="@null"
             android:inputType="textPersonName"
             android:textColor="#0E2165"
             android:ems="10"
             android:id="@+id/edittxtEmail"
             android:background="@drawable/blackthickbox"
-            android:paddingStart="5dp"
+            android:paddingStart="10dp"
             android:hint="E-mail"
             android:layout_below="@+id/edittxtUsername"
             android:layout_alignStart="@+id/edittxtUsername"
@@ -61,7 +51,7 @@
 
         <EditText
             android:layout_width="300dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:textCursorDrawable="@null"
             android:inputType="textPassword"
             android:textColor="#0E2165"
@@ -69,14 +59,14 @@
             android:id="@+id/edittxtPassword"
             android:hint="Password"
             android:background="@drawable/blackthickbox"
-            android:paddingStart="5dp"
+            android:paddingStart="10dp"
             android:layout_below="@+id/edittxtEmail"
             android:layout_alignStart="@+id/edittxtEmail"
             android:layout_marginTop="20dp" />
 
         <EditText
             android:layout_width="300dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:textCursorDrawable="@null"
             android:inputType="textPassword"
             android:textColor="#0E2165"
@@ -84,7 +74,7 @@
             android:id="@+id/edittxtPasswordConfirm"
             android:hint="Confirm Password"
             android:background="@drawable/blackthickbox"
-            android:paddingStart="5dp"
+            android:paddingStart="10dp"
             android:layout_below="@+id/edittxtPassword"
             android:layout_alignStart="@+id/edittxtPassword"
             android:layout_marginTop="20dp" />
