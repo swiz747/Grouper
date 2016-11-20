@@ -5,6 +5,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/killme"/>
+            android:src="@drawable/grouperlogo"/>
     </item>
 </layer-list>
