@@ -37,14 +37,24 @@ public class StarterActivity extends AppCompatActivity {
             xmppConnection = MyXMPP.getInstance(this);
             login();
         } else {
-            openLoginScreen();
+            test();
         }
     }
 
+    /*
     public void openLoginScreen() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragContainer, new LoginFragment()).addToBackStack("login").commit();
+    }
+    */
+
+    public void test() {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragContainer, new LoginFragment())
+                    .addToBackStack(null)
+                    .commit();
     }
 
     public void openMainActivity() {
@@ -106,6 +116,6 @@ public class StarterActivity extends AppCompatActivity {
         editor.putBoolean("loginStatus", false);
         editor.apply();
         Toast.makeText(this.getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-        openLoginScreen();
+        test();
     }
 }

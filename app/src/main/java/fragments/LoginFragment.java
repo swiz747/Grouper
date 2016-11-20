@@ -6,9 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -24,6 +22,7 @@ import android.widget.Toast;
 import com.tritiumlabs.grouper.MainActivity;
 import com.tritiumlabs.grouper.MyXMPP;
 import com.tritiumlabs.grouper.R;
+import fragments.SignupFragment;
 
 public class LoginFragment extends Fragment {
 
@@ -74,13 +73,25 @@ public class LoginFragment extends Fragment {
         signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSignupScreen(null);
+                test();
             }
         });
 
         return view;
     }
 
+    public void test() {
+
+        getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.animator.zoom_in,
+                        R.animator.zoom_out)
+                .replace(R.id.fragContainer, new SignupFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /*
     public void openSignupScreen(@Nullable Bundle argsBundle) {
         Fragment toFragment = new SignupFragment();
         if (argsBundle != null)
@@ -90,9 +101,10 @@ public class LoginFragment extends Fragment {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out);
         transaction.replace(R.id.fragContainer, toFragment).addToBackStack("signup").commit();
     }
+    */
 
     public void openMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
