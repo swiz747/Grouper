@@ -81,7 +81,7 @@ public class SignupFragment extends Fragment {
         }
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         transaction.replace(R.id.fragContainer, toFragment).addToBackStack("login").commit();
     }
 
