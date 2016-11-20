@@ -66,18 +66,24 @@ public class SignupFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                test();
+                openLoginScreen(null);
             }
         });
 
         return view;
     }
 
-    public void test() {
+    public void openLoginScreen(@Nullable Bundle argsBundle) {
+        Fragment toFragment = new LoginFragment();
+        if (argsBundle != null)
+        {
+            toFragment.setArguments(argsBundle);
+        }
+
         getFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.animator.zoom_back_out, R.animator.zoom_back_in)
-                .replace(R.id.fragContainer, new LoginFragment())
+                .setCustomAnimations(R.animator.zoom_back_out, R.animator.zoom_back_in, R.animator.zoom_in, R.animator.zoom_out)
+                .replace(R.id.fragContainer, toFragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -165,7 +171,7 @@ public class SignupFragment extends Fragment {
         btnSignup.setEnabled(true);
         Bundle args = new Bundle();
         args.putString("name", nameText.getText().toString());
-        test();
+        openLoginScreen(null);
     }
 
     public void onSignupFailed() {
