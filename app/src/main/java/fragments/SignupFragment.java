@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -66,13 +66,23 @@ public class SignupFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                openLoginScreen(null);
+                test();
             }
         });
 
         return view;
     }
 
+    public void test() {
+        getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.animator.zoom_back_out, R.animator.zoom_back_in)
+                .replace(R.id.fragContainer, new LoginFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /*
     public void openLoginScreen(@Nullable Bundle argsBundle) {
         Fragment toFragment = new LoginFragment();
         if (argsBundle != null)
@@ -84,6 +94,7 @@ public class SignupFragment extends Fragment {
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         transaction.replace(R.id.fragContainer, toFragment).addToBackStack("login").commit();
     }
+    */
 
     public void signup() {
         Log.d(TAG, "Signup");
@@ -154,7 +165,7 @@ public class SignupFragment extends Fragment {
         btnSignup.setEnabled(true);
         Bundle args = new Bundle();
         args.putString("name", nameText.getText().toString());
-        openLoginScreen(args);
+        test();
     }
 
     public void onSignupFailed() {
