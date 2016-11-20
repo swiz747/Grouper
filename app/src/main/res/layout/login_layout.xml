@@ -3,114 +3,120 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/res_image_blue_gradient">
+        android:fillViewport="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/imgLogo"
-            android:src="@drawable/grouperlogo"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/res_image_blue_gradient">
 
-        <EditText
-            android:layout_width="325dp"
-            android:layout_height="40dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/edittxtUsername"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="190dp"
-            android:background="@drawable/blackthickbox"
-            android:textAlignment="textStart"
-            android:textColor="#0E2165"
-            android:textCursorDrawable="@null"
-            android:paddingStart="10dp"
-            android:hint="Username" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/imgLogo"
+                android:src="@drawable/grouperlogo"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:layout_width="325dp"
-            android:layout_height="40dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/edittxtPassword"
-            android:layout_below="@+id/edittxtUsername"
-            android:layout_alignStart="@+id/edittxtUsername"
-            android:layout_marginTop="25dp"
-            android:hint="Password"
-            android:textColor="#0E2165"
-            android:textCursorDrawable="@null"
-            android:background="@drawable/blackthickbox"
-            android:paddingStart="10dp" />
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/edittxtUsername"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="190dp"
+                android:background="@drawable/blackthickbox"
+                android:textAlignment="textStart"
+                android:textColor="#0E2165"
+                android:textCursorDrawable="@null"
+                android:paddingStart="10dp"
+                android:hint="Username" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Forgot Password?"
-            android:id="@+id/txtForgotPass"
-            android:layout_below="@+id/edittxtPassword"
-            android:layout_alignEnd="@+id/edittxtPassword"
-            android:textColor="#0E2165"
-            android:textSize="15sp"
-            android:layout_marginTop="5dp"
-            android:textStyle="italic" />
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="40dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/edittxtPassword"
+                android:layout_below="@+id/edittxtUsername"
+                android:layout_alignStart="@+id/edittxtUsername"
+                android:layout_marginTop="25dp"
+                android:hint="Password"
+                android:textColor="#0E2165"
+                android:textCursorDrawable="@null"
+                android:background="@drawable/blackthickbox"
+                android:paddingStart="10dp" />
 
-        <CheckBox
-            android:text="Remember Password"
-            android:textColor="#0E2165"
-            android:layout_marginTop="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.90"
-            android:scaleY="0.90"
-            android:buttonTint="@color/primary_darker"
-            android:layout_below="@+id/edittxtPassword"
-            android:layout_alignStart="@+id/edittxtPassword"
-            android:id="@+id/rememberPasswordBox" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Forgot Password?"
+                android:id="@+id/txtForgotPass"
+                android:layout_below="@+id/edittxtPassword"
+                android:layout_alignEnd="@+id/edittxtPassword"
+                android:textColor="#0E2165"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:textStyle="italic" />
 
-        <CheckBox
-            android:text="Stay Logged In"
-            android:textColor="#0E2165"
-            android:layout_marginTop="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.90"
-            android:scaleY="0.90"
-            android:buttonTint="@color/primary_darker"
-            android:layout_below="@+id/edittxtPassword"
-            android:layout_alignEnd="@+id/edittxtPassword"
-            android:id="@+id/stayLoggedBox" />
+            <CheckBox
+                android:text="Remember Password"
+                android:textColor="#0E2165"
+                android:layout_marginTop="30sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.90"
+                android:scaleY="0.90"
+                android:buttonTint="@color/primary_darker"
+                android:layout_below="@+id/edittxtPassword"
+                android:layout_alignStart="@+id/edittxtPassword"
+                android:id="@+id/rememberPasswordBox" />
 
-        <ImageButton
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:scaleType="fitXY"
-            android:id="@+id/imgLogin"
-            android:layout_marginTop="85sp"
-            android:src="@drawable/loginselector"
-            android:background="@android:color/transparent"
-            android:layout_below="@+id/edittxtPassword"
-            android:layout_centerHorizontal="true" />
+            <CheckBox
+                android:text="Stay Logged In"
+                android:textColor="#0E2165"
+                android:layout_marginTop="30sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.90"
+                android:scaleY="0.90"
+                android:buttonTint="@color/primary_darker"
+                android:layout_below="@+id/edittxtPassword"
+                android:layout_alignEnd="@+id/edittxtPassword"
+                android:id="@+id/stayLoggedBox" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="New? Click here to register!"
-            android:id="@+id/txtRegisterNow"
-            android:layout_below="@+id/imgLogin"
-            android:layout_centerInParent="true"
-            android:textColor="#0E2165"
-            android:layout_marginTop="25dp"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imgLogin"
+                android:layout_marginTop="85sp"
+                android:src="@drawable/loginselector"
+                android:background="@android:color/transparent"
+                android:layout_below="@+id/edittxtPassword"
+                android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="New? Click here to register!"
+                android:id="@+id/txtRegisterNow"
+                android:layout_below="@+id/imgLogin"
+                android:layout_centerInParent="true"
+                android:textColor="#0E2165"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
