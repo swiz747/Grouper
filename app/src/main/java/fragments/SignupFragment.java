@@ -12,8 +12,8 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +35,7 @@ public class SignupFragment extends Fragment {
     EditText nameText;
     EditText userEmail;
     EditText passwordText;
-    Button btnSignup;
+    ImageButton btnSignup;
     TextView loginLink;
 
     @Nullable
@@ -43,11 +43,11 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.signup_layout, container, false);
 
-        nameText = (EditText)view.findViewById(R.id.input_name);
-        userEmail = (EditText)view.findViewById(R.id.input_email);
-        passwordText = (EditText)view.findViewById(R.id.input_password);
-        btnSignup = (Button)view.findViewById(R.id.btn_signup);
-        loginLink = (TextView)view.findViewById(R.id.link_login);
+        nameText = (EditText)view.findViewById(R.id.edittxtUsername);
+        userEmail = (EditText)view.findViewById(R.id.edittxtEmail);
+        passwordText = (EditText)view.findViewById(R.id.edittxtPassword);
+        btnSignup = (ImageButton)view.findViewById(R.id.imgbtnRegister);
+        loginLink = (TextView)view.findViewById(R.id.txtLogin);
 
         //TODO: this is for easy testing because im lazy -AB
         nameText.setText("tester");

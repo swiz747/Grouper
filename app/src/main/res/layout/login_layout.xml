@@ -8,6 +8,14 @@
         android:layout_height="match_parent"
         android:background="@drawable/res_image_blue_gradient">
 
+        <ImageView
+            android:layout_width="325dp"
+            android:layout_height="200dp"
+            android:id="@+id/imgLogo"
+            android:src="@drawable/killme"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
         <EditText
             android:layout_width="325dp"
             android:layout_height="50dp"
@@ -39,14 +47,6 @@
             android:background="@drawable/blackthickbox"
             android:paddingStart="5dip" />
 
-        <ImageView
-            android:layout_width="325dp"
-            android:layout_height="200dp"
-            android:id="@+id/imgLogo"
-            android:src="@drawable/killme"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,8 +71,7 @@
             android:buttonTint="@color/primary_darker"
             android:layout_below="@+id/edittxtPassword"
             android:layout_alignStart="@+id/edittxtPassword"
-            android:id="@+id/rememberPasswordBox"
-            />
+            android:id="@+id/rememberPasswordBox" />
 
         <CheckBox
             android:text="Stay Logged In"
@@ -85,9 +84,7 @@
             android:buttonTint="@color/primary_darker"
             android:layout_below="@+id/edittxtPassword"
             android:layout_alignEnd="@+id/edittxtPassword"
-            android:id="@+id/stayLoggedBox"
-
-            />
+            android:id="@+id/stayLoggedBox" />
 
         <ImageButton
             android:layout_width="200dp"
@@ -95,7 +92,7 @@
             android:scaleType="fitXY"
             android:id="@+id/imgLogin"
             android:layout_marginTop="85sp"
-            android:src="@drawable/loginlong"
+            android:src="@drawable/loginselector"
             android:background="@android:color/transparent"
             android:layout_below="@+id/edittxtPassword"
             android:layout_centerHorizontal="true" />
