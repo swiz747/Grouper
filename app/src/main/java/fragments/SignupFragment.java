@@ -35,6 +35,7 @@ public class SignupFragment extends Fragment {
     EditText nameText;
     EditText userEmail;
     EditText passwordText;
+    EditText passwordConfirmText;
     ImageButton btnSignup;
     TextView loginLink;
 
@@ -46,6 +47,7 @@ public class SignupFragment extends Fragment {
         nameText = (EditText)view.findViewById(R.id.edittxtUsername);
         userEmail = (EditText)view.findViewById(R.id.edittxtEmail);
         passwordText = (EditText)view.findViewById(R.id.edittxtPassword);
+        passwordConfirmText = (EditText)view.findViewById(R.id.edittxtPasswordConfirm);
         btnSignup = (ImageButton)view.findViewById(R.id.imgbtnRegister);
         loginLink = (TextView)view.findViewById(R.id.txtLogin);
 
@@ -171,7 +173,7 @@ public class SignupFragment extends Fragment {
         btnSignup.setEnabled(true);
         Bundle args = new Bundle();
         args.putString("name", nameText.getText().toString());
-        openLoginScreen(null);
+        openLoginScreen(args);
     }
 
     public void onSignupFailed() {
@@ -185,26 +187,34 @@ public class SignupFragment extends Fragment {
         String name = nameText.getText().toString();
         String email = userEmail.getText().toString();
         String password = passwordText.getText().toString();
+        String passwordConfirm = passwordConfirmText.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
-            nameText.setError("at least 3 characters");
+            nameText.setError("Name must be at least 3 characters");
             valid = false;
         } else {
             nameText.setError(null);
         }
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            userEmail.setError("enter a valid email address");
+            userEmail.setError("Enter a valid email address");
             valid = false;
         } else {
             userEmail.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 6 || password.length() > 24) {
-            passwordText.setError("between 6 and 24 alphanumeric characters");
+            passwordText.setError("Password must be between 6 and 24 alphanumeric characters");
             valid = false;
         } else {
             passwordText.setError(null);
+        }
+
+        if (passwordConfirm.isEmpty() || passwordConfirm.equals(password) != true) {
+            passwordConfirmText.setError("Passwords do not match");
+            valid = false;
+        } else {
+            passwordConfirmText.setError(null);
         }
 
         return valid;
