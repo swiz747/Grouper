@@ -96,11 +96,11 @@
                 android:id="@+id/chkAgreetoTOS" />
 
             <ImageButton
-                android:layout_width="200dp"
+                android:layout_width="174dp"
                 android:layout_height="50dp"
                 android:scaleType="fitXY"
                 android:id="@+id/imgbtnRegister"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="25dp"
                 android:src="@drawable/registerselector"
                 android:background="@android:color/transparent"
                 android:layout_below="@+id/chkAgreetoTOS"

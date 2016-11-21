@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jivesoftware.smack.SmackException;
@@ -31,6 +33,7 @@ public class AccountFragment extends Fragment {
 
     AccountManager accountManager = AccountManager.getInstance(MyXMPP.connection);
 
+    TextView txtHeaderText;
     Button btnChangeEmail;
     Button btnChangePassword;
     Button btnDeleteAccount;
@@ -41,12 +44,19 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings_account_layout, container, false);
 
+        Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
+
         accountManager.sensitiveOperationOverInsecureConnection(true);
 
         //UI objects
+        txtHeaderText = (TextView)view.findViewById(R.id.txtAccount);
+        txtHeaderText.setTypeface(sab);
         btnChangeEmail = (Button)view.findViewById(R.id.btnChangeEmail);
+        btnChangeEmail.setTypeface(sab);
         btnChangePassword = (Button)view.findViewById(R.id.btnChangePassword);
+        btnChangePassword.setTypeface(sab);
         btnDeleteAccount = (Button)view.findViewById(R.id.btnDeleteAccount);
+        btnDeleteAccount.setTypeface(sab);
 
         //Listeners
         btnChangePassword.setOnClickListener(new View.OnClickListener() {

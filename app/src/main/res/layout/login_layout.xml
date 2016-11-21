@@ -11,7 +11,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/res_image_blue_gradient">
+            android:background="@drawable/res_image_blue_gradient"
+            android:focusableInTouchMode="true">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -94,11 +95,11 @@
                 android:id="@+id/stayLoggedBox" />
 
             <ImageButton
-                android:layout_width="200dp"
+                android:layout_width="159dp"
                 android:layout_height="50dp"
                 android:scaleType="fitXY"
                 android:id="@+id/imgLogin"
-                android:layout_marginTop="85sp"
+                android:layout_marginTop="100sp"
                 android:src="@drawable/loginselector"
                 android:background="@android:color/transparent"
                 android:layout_below="@+id/edittxtPassword"
