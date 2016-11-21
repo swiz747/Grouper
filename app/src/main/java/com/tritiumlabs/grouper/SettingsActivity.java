@@ -19,6 +19,10 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnThemes;
     Button btnNotifications;
 
+    FragmentManager manager;
+
+    public String currentFrag;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +43,18 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void openDefaultFragment() {
+        currentFrag = "default";
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerSettings, new DefaultFragment()).addToBackStack("settingsDefaultFragment").commit();
     }
 
     public void openAccountFragment() {
+        currentFrag = "account";
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerSettings, new AccountFragment()).addToBackStack("settingsAccountFragment").commit();
     }
 }
