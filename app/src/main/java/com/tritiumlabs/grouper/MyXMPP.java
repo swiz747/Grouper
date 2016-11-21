@@ -46,12 +46,10 @@ public class MyXMPP {
 
     private static boolean connected = false;
     private boolean loggedin = false;
-    private static boolean isconnecting = false;
     private static String serverAddress;
     public static XMPPTCPConnection connection;
     private static String loginUser;
-    private static String host;
-    private static int port;
+
     private static String passwordUser;
 
     private static MyXMPP instance = null;
@@ -70,8 +68,6 @@ public class MyXMPP {
 
     private MyXMPP(Context context, String domain, String host, int port) {
         serverAddress = domain;
-        host = host;
-        port = port;
         lbm = LocalBroadcastManager.getInstance(context);
         notificationHelper = new NotificationHelper(context);
         gson = new Gson();
@@ -121,7 +117,12 @@ public class MyXMPP {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                connection.disconnect();
+                //maybe this will fix the whole ghost logged in thing -AB
+                try {
+                    connection.disconnect(new Presence(Presence.Type.unavailable));
+                } catch (SmackException.NotConnectedException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
@@ -193,7 +194,7 @@ public class MyXMPP {
             if (connection.isAuthenticated()) {
                 // maybe preprocess outgoing messages here
                 currentChat.sendMessage(message);
-                Log.d("sendMEssage", body);
+                Log.d("sendMessage", body);
                 dbHandler.addMessage(chatMessage);
 
             } else {
