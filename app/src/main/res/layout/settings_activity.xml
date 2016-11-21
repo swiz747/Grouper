@@ -54,25 +54,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/res_image_blue_gradient">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
-            android:id="@+id/imgFishBlink"/>
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/fragContainerSettings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#AA0000"
-        >
+        android:layout_height="match_parent">
     </FrameLayout>
 
 </LinearLayout>
