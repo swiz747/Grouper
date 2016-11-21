@@ -18,11 +18,9 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnPrivacy;
     Button btnThemes;
     Button btnNotifications;
-
     FragmentManager manager;
 
     public String currentFrag;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,24 +35,45 @@ public class SettingsActivity extends AppCompatActivity {
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAccountFragment();
+                AccountFragment accountFragment = (AccountFragment)getSupportFragmentManager().findFragmentByTag("AccountFragment");
+                if (accountFragment != null && accountFragment.isVisible()) {
+
+                } else {
+                    openAccountFragment();
+                }
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        DefaultFragment defaultFragment = (DefaultFragment) getSupportFragmentManager().findFragmentByTag("DefaultFragment");
+        if (defaultFragment != null && defaultFragment.isVisible()) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     public void openDefaultFragment() {
-        currentFrag = "default";
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.fragContainerSettings, new DefaultFragment()).addToBackStack("settingsDefaultFragment").commit();
+
+        DefaultFragment defaultFragment = new DefaultFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerSettings, defaultFragment, "DefaultFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void openAccountFragment() {
-        currentFrag = "account";
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.fragContainerSettings, new AccountFragment()).addToBackStack("settingsAccountFragment").commit();
+
+        AccountFragment accountFragment = new AccountFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerSettings, accountFragment, "AccountFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
