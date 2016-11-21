@@ -41,11 +41,21 @@ public class StarterActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        LoginFragment defaultFragment = (LoginFragment) getFragmentManager().findFragmentByTag("LoginFragment");
+        if (defaultFragment != null && defaultFragment.isVisible()) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     public void openLoginScreen() {
             getFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out)
-                    .replace(R.id.fragContainer, new LoginFragment())
+                    .replace(R.id.fragContainer, new LoginFragment(), "LoginFragment")
                     .addToBackStack(null)
                     .commit();
     }
