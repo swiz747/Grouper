@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-
+//TODO remove the settings table since were using shared preferences
 public class LocalDBHandler extends SQLiteOpenHelper {
 
     // Database Version

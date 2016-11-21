@@ -38,7 +38,7 @@ public interface ExternalDB
     //
     //-AB
     @FormUrlEncoded
-    @POST("nucleus/db/updatelocation.php")
+    @POST("nucleus/db/requestNiggaCount.php")
     Call<List<ExternalDBResponse>> getAreaCount(
             @Field("longitude") double longitude,
             @Field("latitude") double latitude,
