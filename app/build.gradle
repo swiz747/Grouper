@@ -21,11 +21,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.google.code.gson:gson:2.4'
     // Optional for XMPPTCPConnection
     // Optional for XMPP-IM (RFC 6121) support (Roster, Threaded Chats)
     // Optional for XMPP extensions support
+    compile 'com.google.code.gson:gson:2.4'
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:design:25.0.1'
     compile 'org.igniterealtime.smack:smack-android:4.1.4'
@@ -36,4 +35,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    testCompile 'junit:junit:4.12'
 }
