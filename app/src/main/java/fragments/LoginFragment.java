@@ -3,6 +3,7 @@ package fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,11 @@ public class LoginFragment extends Fragment {
         signupLink = (TextView)view.findViewById(R.id.txtRegisterNow);
         rememberPassword = (CheckBox)view.findViewById(R.id.rememberPasswordBox);
         stayLoggedIn = (CheckBox)view.findViewById(R.id.stayLoggedBox);
+
+        ImageView fishImage = (ImageView) view.findViewById(R.id.imgFishLogoBlink);
+        fishImage.setBackgroundResource(R.drawable.fish_blink_animation);
+        AnimationDrawable fishBlinkAnimation = (AnimationDrawable) fishImage.getBackground();
+        fishBlinkAnimation.start();
 
         if (getArguments() != null) {
             Bundle userInfo = getArguments();
