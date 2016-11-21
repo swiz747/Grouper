@@ -41,14 +41,6 @@ public class StarterActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    public void openLoginScreen() {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragContainer, new LoginFragment()).addToBackStack("login").commit();
-    }
-    */
-
     public void openLoginScreen() {
             getFragmentManager()
                     .beginTransaction()
