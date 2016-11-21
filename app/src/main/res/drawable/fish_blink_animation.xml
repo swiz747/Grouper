@@ -2,8 +2,11 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
     <item android:drawable="@drawable/fish_blink1" android:duration="3000" />
-    <item android:drawable="@drawable/fish_blink2" android:duration="30" />
-    <item android:drawable="@drawable/fish_blink3" android:duration="30" />
-    <item android:drawable="@drawable/fish_blink4" android:duration="30" />
+    <item android:drawable="@drawable/fish_blink2" android:duration="15" />
+    <item android:drawable="@drawable/fish_blink3" android:duration="15" />
+    <item android:drawable="@drawable/fish_blink4" android:duration="15" />
     <item android:drawable="@drawable/fish_blink5" android:duration="30" />
+    <item android:drawable="@drawable/fish_blink4" android:duration="15" />
+    <item android:drawable="@drawable/fish_blink3" android:duration="15" />
+    <item android:drawable="@drawable/fish_blink2" android:duration="15" />
 </animation-list>

@@ -31,7 +31,6 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="135dp"
-                    android:src="@drawable/fish_blink1"
                     android:id="@+id/imgFishLogoBlink"
                     android:layout_marginTop="20dp"
                     android:layout_alignParentTop="true"
