@@ -95,21 +95,6 @@ public class LoginFragment extends Fragment {
                 .commit();
     }
 
-    /*
-    public void openSignupScreen(@Nullable Bundle argsBundle) {
-        Fragment toFragment = new SignupFragment();
-        if (argsBundle != null)
-        {
-            toFragment.setArguments(argsBundle);
-        }
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        transaction.setCustomAnimations(R.animator.zoom_in, R.animator.zoom_out);
-        transaction.replace(R.id.fragContainer, toFragment).addToBackStack("signup").commit();
-    }
-    */
-
     public void openMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
