@@ -41,6 +41,10 @@
             android:theme="@style/AppTheme.Dark">
         </activity>
 
+        <service
+            android:name="com.tritiumlabs.grouper.MyService">
+        </service>
+
     </application>
 
 </manifest>
