@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar toolbar;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -77,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
         startService(i);
 
         setContentView(R.layout.main_activity_new);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         drawerDataList = new ArrayList<MainDrawerItem>();
         mTitle = mDrawerTitle = getTitle();
@@ -101,57 +100,33 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerList.setAdapter(adapter);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                this,
+                mDrawerLayout,
+                toolbar,
+                R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
             }
 
-            public void onDrawerOpened(View drawerView) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                getSupportActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu();
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
-
-        /*
-        btnFriendsList = (Button)findViewById(R.id.btnFriendsList);
-        btnSettings = (Button)findViewById(R.id.btnSettings);
-        btnLogout = (Button)findViewById(R.id.btnLogout);
-
-        btnFriendsList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFriendsList();
-            }
-        });
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updatePreferences();
-                openLogin();
-                finish();
-            }
-        });
-
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSettings();
-            }
-        });
-        */
+        mDrawerLayout.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
+        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
     }
 
     @Override
@@ -327,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
         connectionThread.execute();
 
 
-
+        updatePreferences();
         Intent intent = new Intent(this, StarterActivity.class);
         startActivity(intent);
     }

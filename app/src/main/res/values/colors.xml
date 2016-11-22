@@ -3,6 +3,7 @@
     <color name="primary">#000000</color>
     <color name="primary_dark">#de1515</color>
     <color name="primary_darker">#006FBA</color>
+    <color name="primary_darkerer">#001DFF</color>
     <color name="accent">#42d1d6</color>
 
     <color name="black">#000000</color>
