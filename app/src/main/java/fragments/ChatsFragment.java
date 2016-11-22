@@ -25,7 +25,7 @@ import com.tritiumlabs.grouper.adapters.ChatAdapter;
 
 import java.util.ArrayList;
 
-public class ChatsFragments extends Fragment {
+public class ChatsFragment extends Fragment {
 
     private EditText msg_edittext;
     private String user1 = "",user2 = "";

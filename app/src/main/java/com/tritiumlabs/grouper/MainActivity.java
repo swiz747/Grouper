@@ -38,6 +38,7 @@ import fragments.FriendsListFragment;
 import fragments.mainfragments.FriendsFragment;
 import fragments.mainfragments.GroupChatFragment;
 import fragments.mainfragments.GroupiesFragment;
+import fragments.mainfragments.HomeFragment;
 import fragments.mainfragments.InboxFragment;
 import fragments.mainfragments.ProfileFragment;
 import fragments.mainfragments.SettingsFragment;
@@ -51,20 +52,14 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private Toolbar toolbar;
 
     private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
     MainDrawerAdapter adapter;
     List<MainDrawerItem> drawerDataList;
 
     private MyService mService;
 
-    /*
-    Button btnFriendsList;
-    Button btnSettings;
-    Button btnLogout;
-    */
+    private static int lastClicked;
 
     //TODO Check shared preferences, see if already logged in.
     @Override
@@ -76,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, MyService.class);
         bindService(i, mConnection, Context.BIND_ABOVE_CLIENT);
         startService(i);
-
         setContentView(R.layout.main_activity_new);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        openHomeFragment();
+
         drawerDataList = new ArrayList<MainDrawerItem>();
-        mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -102,9 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -113,20 +108,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                getSupportActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu();
             }
         };
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+    }
+
+    public MyService getmService() {
+        return mService;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalDBHandler handler = LocalDBHandler.getInstance(this);
+        unbindService(mConnection);
+        handler.close();
+        isActive = false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -169,16 +184,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LocalDBHandler handler = LocalDBHandler.getInstance(this);
-        unbindService(mConnection);
-        handler.close();
-        isActive = false;
-    }
-
-    /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -186,87 +191,119 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void openFriendAdd() {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragContainer, new FriendAddFragment()).addToBackStack("addFriend").commit();
-    }
-
     private void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
         Bundle args = new Bundle();
 
-        if (position == 0) {
-            fragment = new InboxFragment();
-            args.putString(InboxFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(InboxFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-
-            fragment.setArguments(args);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.fragContainerMain, fragment).commit();
-
-            mDrawerList.setItemChecked(position, true);
-            setTitle(drawerDataList.get(position).getItemName());
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (position == 1) {
-            fragment = new FriendsFragment();
-            args.putString(FriendsFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(FriendsFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-
-            fragment.setArguments(args);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.fragContainerMain, fragment).commit();
-
-            mDrawerList.setItemChecked(position, true);
-            setTitle(drawerDataList.get(position).getItemName());
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (position == 2) {
-            fragment = new GroupChatFragment();
-            args.putString(GroupChatFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(GroupChatFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-
-            fragment.setArguments(args);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.fragContainerMain, fragment).commit();
-
-            mDrawerList.setItemChecked(position, true);
-            setTitle(drawerDataList.get(position).getItemName());
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (position == 3) {
-            fragment = new ProfileFragment();
-            args.putString(ProfileFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(ProfileFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-
-            fragment.setArguments(args);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.fragContainerMain, fragment).commit();
-
-            mDrawerList.setItemChecked(position, true);
-            setTitle(drawerDataList.get(position).getItemName());
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (position == 4) {
-            fragment = new GroupiesFragment();
-            args.putString(GroupiesFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(GroupiesFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-
-            fragment.setArguments(args);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.fragContainerMain, fragment).commit();
-
-            mDrawerList.setItemChecked(position, true);
-            setTitle(drawerDataList.get(position).getItemName());
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (position == 5) {
+        if (position == 0 && lastClicked != 0) {
+            lastClicked = 0;
+            openInboxFragment(position);
+        } else if (position == 1 && lastClicked != 1) {
+            lastClicked = 1;
+            openFriendsFragment(position);
+        } else if (position == 2 && lastClicked != 2) {
+            lastClicked = 2;
+            openGroupChatFragment(position);
+        } else if (position == 3 && lastClicked != 3) {
+            lastClicked = 3;
+            openProfileFragment(position);
+        } else if (position == 4 && lastClicked != 4) {
+            lastClicked = 4;
+            openGroupiesFragment(position);
+        } else if (position == 5 && lastClicked != 5) {
+            lastClicked = 5;
             openSettings();
-            /*
-            fragment = new SettingsFragment();
-            args.putString(SettingsFragment.ITEM_NAME, drawerDataList.get(position).getItemName());
-            args.putInt(SettingsFragment.ITEM_RESOURCE_ID, drawerDataList.get(position).getImgResID());
-            */
         } else if (position == 6) {
             openLogin();
         }
+    }
+
+    private void openGroupChatFragment(int position) {
+        GroupChatFragment fragment = new GroupChatFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, fragment, "GroupChatFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openProfileFragment(int position) {
+        ProfileFragment fragment = new ProfileFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, fragment, "ProfileFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openGroupiesFragment(int position) {
+        GroupiesFragment fragment = new GroupiesFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, fragment, "GroupiesFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openFriendsFragment(int position) {
+        FriendsFragment fragment = new FriendsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, fragment, "FriendsFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openInboxFragment(int position) {
+        InboxFragment fragment = new InboxFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, fragment, "InboxFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openHomeFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        HomeFragment homeFragment = new HomeFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, homeFragment, "HomeFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void openFriendAdd() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragContainer, new FriendAddFragment()).addToBackStack("addFriend").commit();
     }
 
     public void openFriendsList() {
