@@ -147,7 +147,7 @@ public class LoginFragment extends Fragment {
                 }
                 else
                 {
-                    onLoginFailed(" Bad Credentials");
+                    onLoginFailed("");
                 }
             }
         };
@@ -166,7 +166,7 @@ public class LoginFragment extends Fragment {
     }
 
     public void onLoginFailed(String why) {
-        Toast.makeText(getActivity().getBaseContext(), "Login failed:" + why, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getBaseContext(), "Login failed" + why, Toast.LENGTH_LONG).show();
         btnLogin.setEnabled(true);
     }
 
