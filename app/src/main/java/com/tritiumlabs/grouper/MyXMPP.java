@@ -1,8 +1,10 @@
 package com.tritiumlabs.grouper;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
@@ -61,15 +63,13 @@ public class MyXMPP {
     private XMPPMessageListener messageListener;
     private XMPPRosterListener rosterListener;
     private static LocalBroadcastManager lbm;
-    private static NotificationHelper notificationHelper;
     private Gson gson;
 
     //NEVER USE THE CONSTRUCTOR FOR THIS CLASS USE THE GET INSTANCE METHOD -AB
 
     private MyXMPP(Context context, String domain, String host, int port) {
         serverAddress = domain;
-        lbm = LocalBroadcastManager.getInstance(context);
-        notificationHelper = new NotificationHelper(context);
+        lbm = LocalBroadcastManager.getInstance(context.getApplicationContext());
         gson = new Gson();
 
         //TODO add packet listeners here -AB
@@ -85,6 +85,7 @@ public class MyXMPP {
         XMPPTCPConnection.setUseStreamManagementDefault(true);
         connection = new XMPPTCPConnection(config.build());
         connectionListener = new XMPPConnectionListener();
+
 
         connection.addConnectionListener(connectionListener);
 
@@ -117,14 +118,21 @@ public class MyXMPP {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //maybe this will fix the whole ghost logged in thing -AB
-                try {
-                    connection.disconnect(new Presence(Presence.Type.unavailable));
-                } catch (SmackException.NotConnectedException e) {
-                    e.printStackTrace();
-                }
+                connection.disconnect();
             }
         }).start();
+    }
+    //THIS HAS TO BE IN A THREAD -AB
+    public static void disconnectWithPresence() {
+
+
+        //maybe this will fix the whole ghost logged in thing -AB
+        try {
+            connection.disconnect(new Presence(Presence.Type.unavailable));
+        } catch (SmackException.NotConnectedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void connect(final String caller) {
@@ -687,7 +695,7 @@ public class MyXMPP {
             //if activity is not active
             // prepare intent which is triggered if the
             // notification is selected
-            notificationHelper.messageNotificcation(chatMessage);
+           // notificationHelper.messageNotificcation(chatMessage);
 
 
 
