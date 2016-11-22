@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MyService mService;
 
-    private static int lastClicked;
+    private static int lastClicked = 0;
 
     //TODO Check shared preferences, see if already logged in.
     @Override
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        openHomeFragment();
+        openHomeFragmentInitial();
 
         drawerDataList = new ArrayList<MainDrawerItem>();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         // set up the drawer's list view with items and click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
+        drawerDataList.add(new MainDrawerItem("Home", R.drawable.home_button));
         drawerDataList.add(new MainDrawerItem("Inbox", R.drawable.inbox_button));
         drawerDataList.add(new MainDrawerItem("FriendS", R.drawable.friends_button));
         drawerDataList.add(new MainDrawerItem("Group Chat", R.drawable.group_chat_button));
@@ -198,23 +199,25 @@ public class MainActivity extends AppCompatActivity {
 
         if (position == 0 && lastClicked != 0) {
             lastClicked = 0;
-            openInboxFragment(position);
+            openHomeFragment(position);
         } else if (position == 1 && lastClicked != 1) {
             lastClicked = 1;
-            openFriendsFragment(position);
+            openInboxFragment(position);
         } else if (position == 2 && lastClicked != 2) {
             lastClicked = 2;
-            openGroupChatFragment(position);
+            openFriendsFragment(position);
         } else if (position == 3 && lastClicked != 3) {
             lastClicked = 3;
-            openProfileFragment(position);
+            openGroupChatFragment(position);
         } else if (position == 4 && lastClicked != 4) {
             lastClicked = 4;
-            openGroupiesFragment(position);
+            openProfileFragment(position);
         } else if (position == 5 && lastClicked != 5) {
             lastClicked = 5;
-            openSettings();
+            openGroupiesFragment(position);
         } else if (position == 6) {
+            openSettings();
+        } else if (position == 7) {
             openLogin();
         }
     }
@@ -289,7 +292,22 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
-    private void openHomeFragment() {
+    private void openHomeFragment(int position) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        HomeFragment homeFragment = new HomeFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerMain, homeFragment, "HomeFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        mDrawerList.setItemChecked(position, true);
+        setTitle(drawerDataList.get(position).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void openHomeFragmentInitial() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
