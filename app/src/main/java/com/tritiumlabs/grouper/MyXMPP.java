@@ -68,8 +68,8 @@ public class MyXMPP {
     //NEVER USE THE CONSTRUCTOR FOR THIS CLASS USE THE GET INSTANCE METHOD -AB
 
     private MyXMPP(Context context, String domain, String host, int port) {
-        serverAddress = domain;
-        lbm = LocalBroadcastManager.getInstance(context.getApplicationContext());
+        MyXMPP.serverAddress = domain;
+        MyXMPP.lbm = LocalBroadcastManager.getInstance(context);
         gson = new Gson();
 
         //TODO add packet listeners here -AB
@@ -86,10 +86,7 @@ public class MyXMPP {
         connection = new XMPPTCPConnection(config.build());
         connectionListener = new XMPPConnectionListener();
 
-
         connection.addConnectionListener(connectionListener);
-
-
 
     }
 
@@ -146,7 +143,6 @@ public class MyXMPP {
 
         } catch (IOException e) {
 
-
             Log.e("(" + caller + ")", "IOException: " + e.getMessage());
         } catch (SmackException e) {
 
@@ -156,10 +152,7 @@ public class MyXMPP {
 
             Log.e("connect(" + caller + ")",
                     "XMPPException: " + e.getMessage());
-
         }
-
-
     }
 
 
@@ -769,13 +762,16 @@ public class MyXMPP {
 
     public void doTheThing()
     {
+        /**
         Notification derp = new Notification();
         derp.setFrom("dildo@tritium");
         derp.setType("pendReq");
         derp.setBody("Wants to add you as a friend");
         derp.setExtra("extra info");
 
-        dbHandler.addNotification(derp);
+        dbHandler.addNotification(derp); */
+
+        Log.d("Myxmpp", "did this fucking work?");
     }
 
 }

@@ -24,7 +24,7 @@ public class GroupiesFragment extends Fragment {
     ImageView activeFragIcon;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_groupies_frag, container, false);
+        View view = inflater.inflate(R.layout.main_groupies_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Groupies");
 
         return view;

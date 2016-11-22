@@ -16,7 +16,7 @@ public class ProfileFragment extends Fragment {
     public static final String ITEM_RESOURCE_ID = "itemID";
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_profile_frag, container, false);
+        View view = inflater.inflate(R.layout.main_profile_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
 
         return view;

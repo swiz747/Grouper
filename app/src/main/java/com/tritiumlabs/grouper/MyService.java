@@ -41,7 +41,6 @@ public class MyService extends Service {
         cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         xmpp = MyXMPP.getInstance(MyService.this);
         mainActivityAlive = true;
-        //xmpp.connect("onCreate");
     }
 
     @Override

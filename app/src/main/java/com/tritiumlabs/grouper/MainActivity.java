@@ -163,13 +163,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             // LocalDBHandler handler = LocalDBHandler.getInstance(this);
             //handler.getLocalSettings();
-
             //TODO send to settings fragment.
             return true;
         } else if (id == R.id.fuck_everything) {
             //for when you need to fuck everything -AB
-            LocalDBHandler handler = LocalDBHandler.getInstance(this);
-            handler.fuckeverything();
+            //LocalDBHandler handler = LocalDBHandler.getInstance(this);
+            //handler.fuckeverything();
             return true;
         } else if (id == R.id.add_friend) {
             //TODO temporary add friend
@@ -377,7 +376,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean("loginStatus", false);
         editor.apply();
     }
-
 
     private final ServiceConnection mConnection = new ServiceConnection() {
 

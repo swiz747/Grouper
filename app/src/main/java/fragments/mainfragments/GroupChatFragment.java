@@ -20,7 +20,7 @@ public class GroupChatFragment extends Fragment {
     public static final String ITEM_RESOURCE_ID = "itemID";
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_groupchat_frag, container, false);
+        View view = inflater.inflate(R.layout.main_groupchat_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Group Chat");
 
         return view;

@@ -134,7 +134,7 @@ public class LoginFragment extends Fragment {
             @Override
             protected Boolean doInBackground(Void... params)
             {
-                xmppConnection.connect("login_layout");
+                xmppConnection.connect("login");
                 return xmppConnection.getLoggedIn();
             }
             @Override

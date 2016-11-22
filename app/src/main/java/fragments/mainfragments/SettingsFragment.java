@@ -19,7 +19,7 @@ public class SettingsFragment extends Fragment {
     public static final String ITEM_NAME = "itemName";
     public static final String ITEM_RESOURCE_ID = "itemID";
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_settings_frag, container, false);
+        View view = inflater.inflate(R.layout.main_settings_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Settings");
 
         return view;
