@@ -48,4 +48,15 @@
     <string name="settingsPrivacy">Privacy</string>
     <string name="settingsNotifications">Notifications</string>
     <string name="settingsAccount">Account</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string-array name="menu_array">
+        <item>Inbox</item>
+        <item>Friends</item>
+        <item>Private Message</item>
+        <item>Profile</item>
+        <item>Groupies Chat</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
 </resources>
