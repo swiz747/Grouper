@@ -186,8 +186,8 @@ public class LoginFragment extends Fragment {
 
     public void saveInfo() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-
         SharedPreferences.Editor editor = sharedPref.edit();
+
         editor.putBoolean("loginStatus", true);
         editor.putString("username", userName.getText().toString());
         editor.putString("hiddenPass", passwordText.getText().toString());

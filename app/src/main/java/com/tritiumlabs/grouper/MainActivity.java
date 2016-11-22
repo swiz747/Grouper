@@ -35,6 +35,7 @@ import java.util.List;
 
 import fragments.FriendAddFragment;
 import fragments.FriendsListFragment;
+import fragments.LoginFragment;
 import fragments.mainfragments.FriendsFragment;
 import fragments.mainfragments.GroupChatFragment;
 import fragments.mainfragments.GroupiesFragment;
@@ -72,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
         bindService(i, mConnection, Context.BIND_ABOVE_CLIENT);
         startService(i);
         setContentView(R.layout.main_activity_new);
-
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -140,8 +139,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("HomeFragment");
         if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (homeFragment != null && homeFragment.isVisible()) {
+            finish();
         } else {
             super.onBackPressed();
         }
@@ -357,10 +359,10 @@ public class MainActivity extends AppCompatActivity {
         };
         connectionThread.execute();
 
-
         updatePreferences();
         Intent intent = new Intent(this, StarterActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void openSettings() {

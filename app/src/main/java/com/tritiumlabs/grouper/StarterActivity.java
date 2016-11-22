@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.jivesoftware.smack.XMPPConnection;
 
 import fragments.LoginFragment;
+import fragments.mainfragments.HomeFragment;
 
 public class StarterActivity extends AppCompatActivity {
     private static final String TAG = "StarterActivity";
@@ -33,7 +34,7 @@ public class StarterActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
-        if (sharedPref.getBoolean("loginStatus", false)) {
+        if (sharedPref.getBoolean("loginStatus", false) && sharedPref.getBoolean("stayLoggedIn", false)) {
             xmppConnection = MyXMPP.getInstance(this);
             login();
         } else {
@@ -43,8 +44,8 @@ public class StarterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        LoginFragment defaultFragment = (LoginFragment) getFragmentManager().findFragmentByTag("LoginFragment");
-        if (defaultFragment != null && defaultFragment.isVisible()) {
+        LoginFragment loginFragment = (LoginFragment) getFragmentManager().findFragmentByTag("LoginFragment");
+        if (loginFragment != null && loginFragment.isVisible()) {
             finish();
         } else {
             super.onBackPressed();

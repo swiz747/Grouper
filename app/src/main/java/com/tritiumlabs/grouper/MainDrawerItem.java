@@ -14,6 +14,7 @@ public class MainDrawerItem {
     public String getItemName() {
         return itemName;
     }
+
     public void setItemName(String itemName) {
         itemName = itemName;
     }

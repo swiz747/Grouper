@@ -53,8 +53,8 @@ public class SignupFragment extends Fragment {
 
         //TODO: this is for easy testing because im lazy -AB
         nameText.setText("tester");
-        userEmail.setText("Dildo@gmail.com");
-        passwordText.setText("fuck123");
+        userEmail.setText("testing@gmail.com");
+        passwordText.setText("123456");
 
         btnSignup.setOnClickListener(new View.OnClickListener()
         {
