@@ -6,7 +6,9 @@ package objects;
  * This is a helper class for creating a groupie
  * you create it using the constructor like normal
  * but when you want to talk to the external database just reference
- * the object and call the 
+ * the object and call the groupieCreationString() function.
+ *
+ * that function will vomit out a string that is formatted the way the receiving php page on the server expects
  */
 
 public class Groupie {
