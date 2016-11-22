@@ -37,8 +37,9 @@ public interface ExternalDB
     //please note that the grid size is IN MILES
     //
     //-AB
+    // changed name from niggacount to people count as of 11/22/2016 :(
     @FormUrlEncoded
-    @POST("nucleus/db/requestNiggaCount.php")
+    @POST("nucleus/db/requestPeopleCount.php")
     Call<List<ExternalDBResponse>> getAreaCount(
             @Field("longitude") double longitude,
             @Field("latitude") double latitude,
@@ -76,6 +77,7 @@ public interface ExternalDB
 
     //i know its a fuck load of info to put into a function and im trying to find a way to make it easier
 
+    /**
     @FormUrlEncoded
     @POST("nucleus/db/createGroupie.php")
     Call<List<ExternalDBResponse>> createGroupie(
@@ -91,6 +93,12 @@ public interface ExternalDB
             @Field("groupieLat") double groupieLat,
             @Field("groupieLong") double groupieLong,
             @Field("groupieAddress") String groupieAddress);
+    */
+
+    @FormUrlEncoded
+    @POST("nucleus/db/createGroupie.php")
+    Call<List<ExternalDBResponse>> createGroupie(
+            @Field("groupieCreationString") String groupieCreationString);
 
     //TODO rmember to change all of these IPs when we move to a domain name -AB
     Retrofit retrofit = new Retrofit.Builder()
