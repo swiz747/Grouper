@@ -1,10 +1,12 @@
 package com.tritiumlabs.grouper;
 
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -299,7 +301,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openLogin() {
-        MyXMPP.disconnect();
+        final ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        AsyncTask<Void, Void, Boolean> connectionThread = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected void onPreExecute()
+            {
+                super.onPreExecute();
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Logging Out...");
+                progressDialog.show();
+            }
+            @Override
+            protected Boolean doInBackground(Void... params)
+            {
+                MyXMPP.disconnectWithPresence();
+                return true;
+            }
+            @Override
+            protected void onPostExecute(Boolean result)
+            {
+                progressDialog.dismiss();
+
+            }
+        };
+        connectionThread.execute();
+
+
+
         Intent intent = new Intent(this, StarterActivity.class);
         startActivity(intent);
     }

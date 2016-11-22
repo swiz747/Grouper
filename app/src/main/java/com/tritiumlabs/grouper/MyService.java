@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
@@ -59,7 +60,17 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        xmpp.disconnect();
+        AsyncTask<Void, Void, Boolean> connectionThread = new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... params)
+            {
+                MyXMPP.disconnectWithPresence();
+                return true;
+            }
+
+        };
+        connectionThread.execute();
         mainActivityAlive = false;
     }
 
