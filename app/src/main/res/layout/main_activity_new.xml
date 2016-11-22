@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/primary_darkerer" />
+            android:background="@color/primary_darkest" />
 
     </LinearLayout>
 
