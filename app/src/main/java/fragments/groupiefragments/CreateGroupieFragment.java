@@ -2,6 +2,7 @@ package fragments.groupiefragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,13 +26,32 @@ import com.tritiumlabs.grouper.R;
 public class CreateGroupieFragment extends Fragment {
 
     Button btnDatePicker;
+    EditText txtDescription;
+    EditText txtName;
+    EditText txtLocation;
+    EditText txtDate;
+    EditText txtTime;
+
     int year_x, month_x, day_x;
     static final int DIALOG_ID = 0;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.groupies_create_fragment, container, false);
 
-        btnDatePicker = (Button)view.findViewById(R.id.btnDatePicker);
+        Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
+
+        btnDatePicker = (Button)view.findViewById(R.id.btnGroupieDatePicker);
+        txtDescription = (EditText)view.findViewById(R.id.txtGroupieDescription);
+        txtName = (EditText)view.findViewById(R.id.txtGroupieName);
+        txtLocation = (EditText)view.findViewById(R.id.txtGroupieLocation);
+        txtDate = (EditText)view.findViewById(R.id.txtGroupieDate);
+        txtTime = (EditText)view.findViewById(R.id.txtGroupieTime);
+
+        txtDescription.setTypeface(sab);
+        txtName.setTypeface(sab);
+        txtLocation.setTypeface(sab);
+        txtDate.setTypeface(sab);
+        txtTime.setTypeface(sab);
 
         btnDatePicker.setOnClickListener(
                 new View.OnClickListener() {
@@ -39,7 +61,6 @@ public class CreateGroupieFragment extends Fragment {
                     }
                 }
         );
-
         return view;
     }
 

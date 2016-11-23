@@ -38,8 +38,6 @@ public class GroupiesFragment extends Fragment {
                     }
                 }
         );
-
-
         return view;
     }
 
