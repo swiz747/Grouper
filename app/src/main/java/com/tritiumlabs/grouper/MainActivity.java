@@ -36,6 +36,9 @@ import java.util.List;
 import fragments.FriendAddFragment;
 import fragments.FriendsListFragment;
 import fragments.LoginFragment;
+import fragments.groupiefragments.CreateGroupieFragment;
+import fragments.groupiefragments.DeleteGroupieFragment;
+import fragments.groupiefragments.EditGroupieFragment;
 import fragments.mainfragments.FriendsFragment;
 import fragments.mainfragments.GroupChatFragment;
 import fragments.mainfragments.GroupiesFragment;
@@ -196,30 +199,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = null;
-        Bundle args = new Bundle();
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("HomeFragment");
+        InboxFragment inboxFragment = (InboxFragment) getSupportFragmentManager().findFragmentByTag("InboxFragment");
+        FriendsFragment friendsFragment = (FriendsFragment) getSupportFragmentManager().findFragmentByTag("FriendsFragment");
+        GroupChatFragment groupChatFragment = (GroupChatFragment) getSupportFragmentManager().findFragmentByTag("GroupChatFragment");
+        ProfileFragment profileFragment = (ProfileFragment) getSupportFragmentManager().findFragmentByTag("ProfileFragment");
+        GroupiesFragment groupiesFragment = (GroupiesFragment) getSupportFragmentManager().findFragmentByTag("GroupiesFragment");
 
-        //TODO: This does not work as intended. Pressing back breaks this sequence. Can be fixed by instead checking active fragment
+        if (position == 0) {
+            if (homeFragment != null && homeFragment.isVisible()) {
 
-        if (position == 0 && lastClicked != 0) {
-            lastClicked = 0;
-            openHomeFragment(position);
-        } else if (position == 1 && lastClicked != 1) {
-            lastClicked = 1;
-            openInboxFragment(position);
-        } else if (position == 2 && lastClicked != 2) {
-            lastClicked = 2;
-            openFriendsFragment(position);
-        } else if (position == 3 && lastClicked != 3) {
-            lastClicked = 3;
-            openGroupChatFragment(position);
-        } else if (position == 4 && lastClicked != 4) {
-            lastClicked = 4;
-            openProfileFragment(position);
-        } else if (position == 5 && lastClicked != 5) {
-            lastClicked = 5;
-            openGroupiesFragment(position);
+            } else {
+                openHomeFragment(position);
+            }
+        } else if (position == 1) {
+            if (inboxFragment != null && inboxFragment.isVisible()) {
+
+            } else {
+                openInboxFragment(position);
+            }
+        } else if (position == 2) {
+            if (friendsFragment != null && friendsFragment.isVisible()) {
+
+            } else {
+                openFriendsFragment(position);
+            }
+        } else if (position == 3) {
+            if (groupChatFragment != null && groupChatFragment.isVisible()) {
+
+            } else {
+                openGroupChatFragment(position);
+            }
+        } else if (position == 4) {
+            if (profileFragment != null && profileFragment.isVisible()) {
+
+            } else {
+                openProfileFragment(position);
+            }
+        } else if (position == 5) {
+            if (groupiesFragment != null && groupiesFragment.isVisible()) {
+
+            } else {
+                openGroupiesFragment(position);
+            }
         } else if (position == 6) {
             openSettings();
         } else if (position == 7) {
