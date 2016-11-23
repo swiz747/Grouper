@@ -33,10 +33,18 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
         TextView tv = (TextView) getActivity().findViewById(R.id.txtGroupieTime);
         if (hourOfDay < 12) {
-            tv.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute) + " AM");
+            if (minute < 10) {
+                tv.setText(String.valueOf(hourOfDay) + ": 0" + String.valueOf(minute) + " AM");
+            } else {
+                tv.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute) + " AM");
+            }
         } else {
             int hour = hourOfDay - 12;
-            tv.setText(String.valueOf(hour) + ":" + String.valueOf(minute) + " PM");
+            if (minute < 10) {
+                tv.setText(String.valueOf(hour) + ": 0" + String.valueOf(minute) + " PM");
+            } else {
+                tv.setText(String.valueOf(hour) + ":" + String.valueOf(minute) + " PM");
+            }
         }
     }
 }
