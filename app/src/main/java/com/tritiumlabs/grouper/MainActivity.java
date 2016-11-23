@@ -200,6 +200,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Bundle args = new Bundle();
 
+        //TODO: This does not work as intended. Pressing back breaks this sequence. Can be fixed by instead checking active fragment
+
         if (position == 0 && lastClicked != 0) {
             lastClicked = 0;
             openHomeFragment(position);
