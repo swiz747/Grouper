@@ -105,6 +105,7 @@ public class LoginFragment extends Fragment {
     public void openMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     public void login() {

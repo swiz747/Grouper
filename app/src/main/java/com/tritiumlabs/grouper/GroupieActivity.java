@@ -1,11 +1,17 @@
 package com.tritiumlabs.grouper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import fragments.groupiefragments.CreateGroupieFragment;
+import fragments.groupiefragments.DeleteGroupieFragment;
+import fragments.groupiefragments.EditGroupieFragment;
 
 /**
  * Created by Arthur on 11/21/2016.
@@ -20,9 +26,54 @@ import android.widget.Button;
 public class GroupieActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.groupie_activity);
 
+        String action = getIntent().getStringExtra("action");
+
+        if (action.equals("create")) {
+            createGroupieFragment();
+        } else if (action.equals("delete")) {
+            deleteGroupieFragment();
+        } else if (action.equals("edit")) {
+            editGroupieFragment();
+        }
     }
 
+    @Override
+    public void onBackPressed() {
+        CreateGroupieFragment createGroupie = (CreateGroupieFragment) getSupportFragmentManager().findFragmentByTag("CreateGroupieFragment");
+        EditGroupieFragment editGroupie = (EditGroupieFragment) getSupportFragmentManager().findFragmentByTag("EditGroupieFragment");
+        DeleteGroupieFragment deleteGroupie = (DeleteGroupieFragment) getSupportFragmentManager().findFragmentByTag("DeleteGroupieFragment");
+
+        if (createGroupie != null && createGroupie.isVisible()) {
+            finish();
+        } else if (editGroupie != null && editGroupie.isVisible()) {
+            finish();
+        } else if (deleteGroupie != null && deleteGroupie.isVisible()) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    public void createGroupieFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        CreateGroupieFragment createGroupieFragment = new CreateGroupieFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerGroupie, createGroupieFragment, "CreateGroupieFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void editGroupieFragment() {
+    }
+
+    private void deleteGroupieFragment() {
+    }
 
 }
 

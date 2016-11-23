@@ -29,7 +29,6 @@ public class MainDrawerAdapter extends ArrayAdapter<MainDrawerItem> {
         this.context = context;
         this.drawerItemList = listItems;
         this.layoutResID = layoutResourceID;
-
     }
 
     @Override
@@ -52,14 +51,12 @@ public class MainDrawerAdapter extends ArrayAdapter<MainDrawerItem> {
 
         } else {
             drawerHolder = (DrawerItemHolder) view.getTag();
-
         }
 
         MainDrawerItem dItem = (MainDrawerItem) this.drawerItemList.get(position);
 
         drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(
                 dItem.getImgResID()));
-
         return view;
     }
 

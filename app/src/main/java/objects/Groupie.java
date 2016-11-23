@@ -118,10 +118,6 @@ public class Groupie {
         {
             returnString += this.groupieAddress ;
         }
-
-
-
-
         return returnString;
     }
 }

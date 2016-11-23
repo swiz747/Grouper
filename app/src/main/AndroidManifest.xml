@@ -37,6 +37,11 @@
         </activity>
 
         <activity
+            android:name=".GroupieActivity"
+            android:theme="@style/AppTheme.Dark">
+        </activity>
+
+        <activity
             android:name=".SettingsActivity"
             android:theme="@style/AppTheme.Dark">
         </activity>

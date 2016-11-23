@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         unbindService(mConnection);
         handler.close();
         isActive = false;
+        MyXMPP.disconnectWithPresence();
     }
 
     @Override
@@ -182,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             openMapFragment();
             return true;
         } else if (id == R.id.refresh) {
-
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -226,9 +226,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGroupChatFragment(int position) {
-        GroupChatFragment fragment = new GroupChatFragment();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        GroupChatFragment fragment = new GroupChatFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerMain, fragment, "GroupChatFragment");
         transaction.addToBackStack(null);
@@ -240,9 +241,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openProfileFragment(int position) {
-        ProfileFragment fragment = new ProfileFragment();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        ProfileFragment fragment = new ProfileFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerMain, fragment, "ProfileFragment");
         transaction.addToBackStack(null);
@@ -254,9 +256,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGroupiesFragment(int position) {
-        GroupiesFragment fragment = new GroupiesFragment();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        GroupiesFragment fragment = new GroupiesFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerMain, fragment, "GroupiesFragment");
         transaction.addToBackStack(null);
@@ -268,9 +271,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFriendsFragment(int position) {
-        FriendsFragment fragment = new FriendsFragment();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        FriendsFragment fragment = new FriendsFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerMain, fragment, "FriendsFragment");
         transaction.addToBackStack(null);
@@ -282,9 +286,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openInboxFragment(int position) {
-        InboxFragment fragment = new InboxFragment();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        InboxFragment fragment = new InboxFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerMain, fragment, "InboxFragment");
         transaction.addToBackStack(null);
