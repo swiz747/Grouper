@@ -2,15 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick Time"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/imgGroupieUploadImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:id="@+id/btnGroupieDatePicker" />
+        android:background="@drawable/textbox"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="125dp"
+        android:id="@+id/btnGroupieUploadImage"
+        android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -20,7 +27,7 @@
         <EditText
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="220dp"
             android:layout_marginStart="145dp"
             android:id="@+id/txtGroupieTime"
             android:background="@drawable/singlelinetextbox"
@@ -29,12 +36,14 @@
             android:textCursorDrawable="@null"
             android:paddingStart="5dp"
             android:textColor="@color/primary_darkest"
+            android:textSize="14dp"
+            android:clickable="true"
             android:layout_alignParentTop="true" />
 
         <EditText
             android:layout_width="130dp"
             android:layout_height="30dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="220dp"
             android:layout_marginEnd="120dp"
             android:id="@+id/txtGroupieLocation"
             android:background="@drawable/singlelinetextbox"
@@ -43,6 +52,7 @@
             android:textCursorDrawable="@null"
             android:paddingStart="5dp"
             android:textColor="@color/primary_darkest"
+            android:textSize="14dp"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
@@ -55,29 +65,32 @@
         <EditText
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="170dp"
             android:layout_marginStart="145dp"
-            android:id="@+id/txtGroupieName"
+            android:id="@+id/txtGroupieDate"
             android:background="@drawable/singlelinetextbox"
             android:hint="Date"
             android:textColorHint="#600E125B"
             android:textCursorDrawable="@null"
             android:paddingStart="5dp"
             android:textColor="@color/primary_darkest"
+            android:textSize="14dp"
+            android:clickable="true"
             android:layout_alignParentTop="true" />
 
         <EditText
             android:layout_width="130dp"
             android:layout_height="30dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="170dp"
             android:layout_marginEnd="120dp"
-            android:id="@+id/txtGroupieDate"
+            android:id="@+id/txtGroupieName"
             android:background="@drawable/singlelinetextbox"
             android:hint="Name"
             android:textColorHint="#600E125B"
             android:textCursorDrawable="@null"
             android:paddingStart="5dp"
             android:textColor="@color/primary_darkest"
+            android:textSize="14dp"
             android:layout_alignParentTop="true" />
 
     </RelativeLayout>
@@ -87,7 +100,7 @@
         android:layout_height="120dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="270dp"
         android:inputType="textMultiLine"
         android:lines="8"
         android:gravity="top|left"

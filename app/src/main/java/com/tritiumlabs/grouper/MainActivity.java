@@ -1,5 +1,7 @@
 package com.tritiumlabs.grouper;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,12 +28,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.DatePicker;
 import android.widget.ListView;
 
 import com.tritiumlabs.grouper.R;
 import com.tritiumlabs.grouper.adapters.MainDrawerAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import fragments.FriendAddFragment;
@@ -265,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openProfileFragment(int position) {
-        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         ProfileFragment fragment = new ProfileFragment();
@@ -280,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGroupiesFragment(int position) {
-        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         GroupiesFragment fragment = new GroupiesFragment();
@@ -295,7 +298,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFriendsFragment(int position) {
-        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         FriendsFragment fragment = new FriendsFragment();
@@ -310,7 +312,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openInboxFragment(int position) {
-        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         InboxFragment fragment = new InboxFragment();
