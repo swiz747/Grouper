@@ -7,8 +7,9 @@ package objects;
  * you create it using the constructor like normal
  * but when you want to talk to the external database just reference
  * the object and call the groupieCreationString() function.
- *
  * that function will vomit out a string that is formatted the way the receiving php page on the server expects
+ *
+ * DO NOT FORGET TO FILL OUT ANY FIELD HERE EXCEPT ADDRESS!!!!
  */
 
 public class Groupie {
