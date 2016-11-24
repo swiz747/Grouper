@@ -95,6 +95,7 @@ public interface ExternalDB
             @Field("groupieAddress") String groupieAddress);
     */
 
+    //for more info on this go to the Groupie class comments -AB
     @FormUrlEncoded
     @POST("nucleus/db/createGroupie.php")
     Call<List<ExternalDBResponse>> createGroupie(

@@ -94,12 +94,17 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
             {
+
                 Log.d("response: ", response.body().get(0).getMainResponse());
                 Log.d("response: ", response.body().get(0).getResponseCode());
                 Log.d("response: ", response.body().get(0).getResponseMessage());
                 Log.d("response: ", response.body().get(0).getEchoInput());
 
-                areaCount.setText(response.body().get(0).getMainResponse());
+                //TODO set this as a string resource and whatnot -AB
+
+                areaCount.setText(response.body().get(0).getMainResponse() + " Users in your area!");
+
+
             }
 
             @Override

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.tritiumlabs.grouper.R;
 
@@ -25,6 +26,7 @@ public class CreateGroupieFragment extends Fragment {
     EditText txtLocation;
     EditText txtDate;
     EditText txtTime;
+    ImageButton btnCreate;
 
     private int year, month, day;
 
@@ -41,11 +43,14 @@ public class CreateGroupieFragment extends Fragment {
         txtDate = (EditText)view.findViewById(R.id.txtGroupieDate);
         txtTime = (EditText)view.findViewById(R.id.txtGroupieTime);
 
+        btnCreate = (ImageButton)view.findViewById(R.id.btnGroupieGroupIt);
+
         txtDescription.setTypeface(sab);
         txtName.setTypeface(sab);
         txtLocation.setTypeface(sab);
 
         //TODO: Buy this font damnit. -KD
+        //TODO: I will soz <3 -AB
         //txtDate.setTypeface(sab);
         //txtTime.setTypeface(sab);
 
@@ -69,6 +74,16 @@ public class CreateGroupieFragment extends Fragment {
                     }
                 }
         );
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+                //TODO add input validation to make sure they didnt leave anything blank, the server gets angry if that happens and it hits me when its angry :( -AB
+
+            }
+        });
 
         return view;
     }
