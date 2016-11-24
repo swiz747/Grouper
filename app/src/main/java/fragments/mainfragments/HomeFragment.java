@@ -1,5 +1,8 @@
 package fragments.mainfragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,10 +27,61 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment{
 
+    private TextView txtWelcome;
+    private TextView txtUsername;
+    private TextView txtCityState;
+    private TextView txtUserbio;
+    private TextView txtUserinformation;
+    private TextView txtRecentActivity;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_home_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
+
+        txtWelcome = (TextView) view.findViewById(R.id.txtHomeWelcomeBack);
+        txtUsername = (TextView) view.findViewById(R.id.txtHomeUserName);
+        txtCityState = (TextView) view.findViewById(R.id.txtHomeCityState);
+        txtUserbio = (TextView) view.findViewById(R.id.txtHomeUserbio);
+        txtUserinformation = (TextView) view.findViewById(R.id.txtHomeUserinfo);
+        txtRecentActivity = (TextView) view.findViewById(R.id.txtHomeRecentActivity);
+
+        txtWelcome.setTypeface(sab);
+        txtUsername.setTypeface(sab);
+        txtCityState.setTypeface(sab);
+        txtUserbio.setTypeface(sab);
+        txtRecentActivity.setTypeface(sab);
+        //txtUserinformation.setTypeface(sab);
+
+        String username = sharedPref.getString("username", "");
+        String citystate = sharedPref.getString("citystate", "");
+        String userbio = sharedPref.getString("userbio", "");
+        String userinfo = sharedPref.getString("userinfo", "");
+
+        txtUsername.setText(username);
+
+        if (citystate.equals("")) {
+            txtCityState.setText("Enter State");
+            txtCityState.setTextColor(getResources().getColor(R.color.primary_darkest_translucent));
+        } else {
+            txtCityState.setText(citystate);
+        }
+
+        if (userbio.equals("")) {
+            txtUserbio.setText("Enter bio");
+            txtUserbio.setTextColor(getResources().getColor(R.color.primary_darkest_translucent));
+        } else {
+            txtUserbio.setText(userbio);
+        }
+
+        if (userinfo.equals("")) {
+            txtUserinformation.setText("Enter info");
+            txtUserinformation.setTextColor(getResources().getColor(R.color.primary_darkest_translucent));
+        } else {
+            txtUserinformation.setText(userinfo);
+        }
 
         final TextView areaCount = (TextView) view.findViewById(R.id.txtAreaCount);
 
@@ -39,15 +93,12 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
             {
-
                 Log.d("response: ", response.body().get(0).getMainResponse());
                 Log.d("response: ", response.body().get(0).getResponseCode());
                 Log.d("response: ", response.body().get(0).getResponseMessage());
                 Log.d("response: ", response.body().get(0).getEchoInput());
 
                 areaCount.setText(response.body().get(0).getMainResponse());
-
-
             }
 
             @Override

@@ -4,13 +4,14 @@
     android:layout_height="fill_parent">
 
     <TextView
-        android:id="@+id/txtWelcomeBack"
+        android:id="@+id/txtHomeWelcomeBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Welcome Back!"
         android:layout_marginTop="10dp"
         android:textSize="35dp"
+        android:textColor="@color/primary_darkest"
         />
 
     <LinearLayout
@@ -19,7 +20,7 @@
         android:gravity="center_horizontal">
 
         <ImageView
-            android:id="@+id/imgProfileImage"
+            android:id="@+id/imgHomeProfileImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:gravity="center_horizontal"
@@ -29,12 +30,13 @@
             />
 
         <TextView
-            android:id="@+id/txtUserName"
+            android:id="@+id/txtHomeUserName"
             android:layout_width="220dp"
             android:layout_height="40dp"
             android:layout_marginTop="80dp"
             android:text="UserName"
             android:textSize="30dp"
+            android:textColor="@color/primary_darkest"
             />
 
     </LinearLayout>
@@ -45,14 +47,14 @@
         android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/txtCityState"
+            android:id="@+id/txtHomeCityState"
             android:layout_width="220dp"
             android:layout_height="40dp"
             android:layout_marginTop="115dp"
             android:layout_marginStart="100dp"
             android:text="City, State"
             android:textSize="25dp"
-            android:textColor="#66FFFFFF"
+            android:textColor="@color/primary_darkest_translucent"
             />
 
     </LinearLayout>
@@ -63,6 +65,7 @@
         android:gravity="center_horizontal">
 
         <TextView
+            android:id="@+id/txtHomeUserbio"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="This is a user bio."
@@ -72,14 +75,17 @@
             android:gravity="top|left"
             android:layout_marginTop="155dp"
             android:layout_marginStart="100dp"
+            android:textColor="@color/primary_darkest"
             />
 
         <TextView
+            android:id="@+id/txtHomeUserinfo"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="165dp"
             android:layout_marginEnd="230dp"
             android:text="21\nMale\n11/23/2016"
+            android:textColor="@color/primary_darkest"
             />
 
     </RelativeLayout>
@@ -106,8 +112,9 @@
             android:layout_marginTop="10dp"
             android:text="0 Friends online"
             android:gravity="center"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:layout_below="@+id/seperatorNorth"
+            android:textColor="@color/primary_darkest"
             />
 
         <Button
@@ -130,14 +137,16 @@
             />
 
         <TextView
-            android:layout_width="200dp"
+            android:id="@+id/txtHomeRecentActivity"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/seperatorSouth"
             android:layout_marginTop="10dp"
             android:text="Recent Activity"
             android:gravity="center"
-            android:textSize="30dp"
+            android:textSize="25dp"
+            android:textColor="@color/primary_darkest"
             />
 
     </RelativeLayout>
