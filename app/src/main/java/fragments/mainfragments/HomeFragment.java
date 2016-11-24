@@ -109,9 +109,6 @@ public class HomeFragment extends Fragment{
             }
         });
 
-
-
-
         return view;
     }
     //should probably be renamed

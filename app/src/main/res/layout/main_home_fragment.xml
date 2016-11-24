@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Welcome Back!"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textSize="35dp"
         android:textColor="@color/primary_darkest"
         />
@@ -33,7 +33,7 @@
             android:id="@+id/txtHomeUserName"
             android:layout_width="220dp"
             android:layout_height="40dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="75dp"
             android:text="UserName"
             android:textSize="30dp"
             android:textColor="@color/primary_darkest"
@@ -74,7 +74,7 @@
             android:lines="3"
             android:gravity="top|left"
             android:layout_marginTop="155dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="95dp"
             android:textColor="@color/primary_darkest"
             />
 

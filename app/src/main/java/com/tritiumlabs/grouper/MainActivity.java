@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
         if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
         } else if (homeFragment != null && homeFragment.isVisible()) {
-            finish();
+            this.moveTaskToBack(true);
         } else {
-            super.onBackPressed();
+            openHomeFragmentInitial();
         }
     }
 
