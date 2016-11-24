@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment{
         txtRecentActivity.setTypeface(sab);
         //txtUserinformation.setTypeface(sab);
 
+        //TODO: Should be pulling this info from the database rather than a shared preference. -KD
         String username = sharedPref.getString("username", "");
         String citystate = sharedPref.getString("citystate", "");
         String userbio = sharedPref.getString("userbio", "");
