@@ -193,6 +193,19 @@ public class LoginFragment extends Fragment {
         editor.putString("username", userName.getText().toString());
         editor.putString("hiddenPass", passwordText.getText().toString());
 
+        //TODO: User info like this should be stored in the database. This is temporary for the sake of visual -KD
+        if (!sharedPref.contains("citystate")) {
+            editor.putString("citystate", "");
+        }
+
+        if (!sharedPref.contains("userbio")) {
+            editor.putString("userbio", "");
+        }
+
+        if (!sharedPref.contains("userinfo")) {
+            editor.putString("userinfo", "");
+        }
+
         if (rememberPassword.isChecked()) {
             editor.putString("password", passwordText.getText().toString());
             editor.putBoolean("rememberPass", true);

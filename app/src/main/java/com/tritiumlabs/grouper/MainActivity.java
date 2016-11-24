@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         // set up the drawer's list view with items and click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        drawerDataList.add(new MainDrawerItem("Home", R.drawable.ic_fish_homebutton));
+        drawerDataList.add(new MainDrawerItem("Home", R.drawable.homebutton));
         drawerDataList.add(new MainDrawerItem("Inbox", R.drawable.inbox_button));
         drawerDataList.add(new MainDrawerItem("FriendS", R.drawable.friends_button));
         drawerDataList.add(new MainDrawerItem("Group Chat", R.drawable.group_chat_button));
@@ -178,8 +178,8 @@ public class MainActivity extends AppCompatActivity {
             //handler.getLocalSettings();
             //TODO send to settings fragment.
             return true;
-        } else if (id == R.id.fuck_everything) {
-            //for when you need to fuck everything -AB
+        } else if (id == R.id.destroy_everything) {
+            //for when you need to destroy everything -AB
             //LocalDBHandler handler = LocalDBHandler.getInstance(this);
             //handler.fuckeverything();
             return true;
