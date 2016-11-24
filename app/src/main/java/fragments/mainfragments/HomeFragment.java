@@ -30,10 +30,10 @@ public class HomeFragment extends Fragment{
 
 
         final TextView areaCount = (TextView) view.findViewById(R.id.txtAreaCount);
-
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
 
+        //TODO pass in users current lat/long and the size of grid for searching -AB
+        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
 
         call.enqueue(new Callback<List<ExternalDBResponse>>() {
             @Override
@@ -45,8 +45,9 @@ public class HomeFragment extends Fragment{
                 Log.d("response: ", response.body().get(0).getResponseMessage());
                 Log.d("response: ", response.body().get(0).getEchoInput());
 
-                areaCount.setText(response.body().get(0).getMainResponse());
+                //TODO set this as a string resource and whatnot -AB
 
+                areaCount.setText(response.body().get(0).getMainResponse() + " Users in your area!");
 
             }
 
@@ -62,45 +63,5 @@ public class HomeFragment extends Fragment{
 
         return view;
     }
-    //should probably be renamed
-    public ExternalDBResponse getNiggaCount()
-    {
-        final ExternalDBResponse returnResponse = new ExternalDBResponse();
 
-
-        ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        //TODO change username to be dynamic -AB
-        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
-
-
-        call.enqueue(new Callback<List<ExternalDBResponse>>() {
-            @Override
-            public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
-            {
-
-                Log.d("response: ", response.body().get(0).getMainResponse());
-                Log.d("response: ", response.body().get(0).getResponseCode());
-                Log.d("response: ", response.body().get(0).getResponseMessage());
-                Log.d("response: ", response.body().get(0).getEchoInput());
-
-                returnResponse.setMainResponse(response.body().get(0).getMainResponse());
-                returnResponse.setResponseCode(response.body().get(0).getResponseCode());
-                returnResponse.setResponseMessage(response.body().get(0).getResponseMessage());
-                returnResponse.setEchoInput(response.body().get(0).getEchoInput());
-
-                Log.d("response: ", returnResponse.getMainResponse());
-            }
-
-            @Override
-            public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t) {
-
-
-                Log.d("Tracker", t.getMessage());
-            }
-        });
-
-
-        Log.d("response: test ", returnResponse.getMainResponse());
-        return returnResponse;
-    }
 }
