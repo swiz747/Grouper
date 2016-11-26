@@ -1,23 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <Spinner
-        android:id="@+id/spnState"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        >
-    </Spinner>
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:text="ProfileFrag"
-        android:textSize="50dp"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtMainProfileUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="170dp"
+                android:text="UserName"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="@color/primary_darkest"
+
+                />
+
+            <TextView
+                android:id="@+id/txtMainProfileState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtMainProfileUsername"
+                android:text="State"
+                android:textSize="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <TextView
+                android:id="@+id/txtMainProfileAgeGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtMainProfileState"
+                android:text="Age, Gender"
+                android:textSize="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <TextView
+                android:id="@+id/txtMainProfileBio"
+                android:layout_width="250dp"
+                android:layout_height="120dp"
+                android:layout_below="@id/txtMainProfileAgeGender"
+                android:layout_centerHorizontal="true"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:textColorHint="#600E125B"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/profile_picture_header" />
+
+            <ImageView
+                android:id="@+id/imgProfilePicture"
+                android:background="@drawable/profile_picture_test_image"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/profile_picture_overlay"/>
+
+            <ImageButton
+                android:id="@+id/btnMainProfileEditProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_settings_wheel"
+                />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

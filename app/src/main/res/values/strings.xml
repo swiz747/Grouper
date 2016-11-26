@@ -112,4 +112,5 @@
         <item>Wisconsin</item>
         <item>Wyoming</item>
     </string-array>
+    <string name="select_picture">Select Picture</string>
 </resources>

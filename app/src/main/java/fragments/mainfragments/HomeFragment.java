@@ -1,9 +1,14 @@
 package fragments.mainfragments;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +17,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.vision.text.Text;
 import com.tritiumlabs.grouper.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import interfaces.ExternalDB;
@@ -33,6 +47,7 @@ public class HomeFragment extends Fragment{
     private TextView txtUserbio;
     private TextView txtUserinformation;
     private TextView txtRecentActivity;
+    private ImageView imgProfilePicture;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_home_fragment, container, false);
@@ -84,6 +99,19 @@ public class HomeFragment extends Fragment{
             txtUserinformation.setText(userinfo);
         }
 
+        try {
+            ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            imgProfilePicture = (ImageView) view.findViewById(R.id.imgHomeProfileImage);
+            imgProfilePicture.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
         final TextView areaCount = (TextView) view.findViewById(R.id.txtAreaCount);
 
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
@@ -116,6 +144,7 @@ public class HomeFragment extends Fragment{
 
         return view;
     }
+
     //should probably be renamed
     public ExternalDBResponse getNiggaCount()
     {

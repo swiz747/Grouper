@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/edittxtLongDescription"
-                android:text="This is a fucking profile thing I fucking hate my life. I fucking hate gradients. Kill me now. I hate photoshop. I hate it all. This is bull shit but hey check out this cool box!"
+                android:text="This is a fucking profile thing I fucking hate my life. I fucking hate gradients. Kill me now. I hate photoshop. I hate it all. This is bull shit but hey check out this cool box"
                 android:fillViewport="true"
                 android:inputType="textMultiLine"
                 android:layout_alignTop="@+id/scrollView8"

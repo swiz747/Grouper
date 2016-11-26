@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         isActive = true;
         Log.d(TAG, "on create method");
 
+        contextOfApplication = getApplicationContext();
+
         Intent i = new Intent(this, MyService.class);
         bindService(i, mConnection, Context.BIND_ABOVE_CLIENT);
         startService(i);
@@ -147,6 +149,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static Context contextOfApplication;
+    public static Context getContextOfApplication()
+    {
+        return contextOfApplication;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onBackPressed() {
         HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("HomeFragment");
         if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -195,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override

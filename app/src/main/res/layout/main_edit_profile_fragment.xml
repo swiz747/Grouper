@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtMainEditProfileUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="165dp"
+                android:text="UserName"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <RelativeLayout
+                android:id="@+id/EditProfileStateRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="225dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txtMainEditProfileState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="State: "
+                    android:textSize="25dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/primary_darkest"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnState"
+                    android:layout_marginStart="42dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/singlelinetextbox"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/txtMainEditProfileState"
+                    >
+                </Spinner>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/EditProfileBirthdayRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_below="@+id/EditProfileStateRelativeLayout"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/txtMainEditProfileBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birthday: "
+                    android:textSize="25dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/primary_darkest"
+                    />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtMainEditProfileDateOfBirth"
+                    android:background="@drawable/singlelinetextbox"
+                    android:hint="Date of Birth"
+                    android:textColorHint="#600E125B"
+                    android:textCursorDrawable="@null"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/primary_darkest"
+                    android:textSize="15dp"
+                    android:layout_toEndOf="@+id/txtMainEditProfileBirthday"
+                    android:layout_centerVertical="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/EditProfileGenderRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/EditProfileBirthdayRelativeLayout"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/txtMainEditProfileGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender: "
+                    android:textSize="25dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/primary_darkest"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnGender"
+                    android:layout_marginStart="17dp"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/singlelinetextbox"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/txtMainEditProfileGender"
+                    >
+                </Spinner>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/EditProfileBioRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/EditProfileGenderRelativeLayout">
+
+                <EditText
+                    android:id="@+id/txtMainEditProfileBio"
+                    android:layout_width="250dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:textColor="@color/primary_darkest"
+                    android:textColorHint="#600E125B"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15dp"
+                    android:hint="Click to edit bio"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top|left"
+                    />
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/btnMainEditProfileSave"
+                android:layout_width="159dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/EditProfileBioRelativeLayout"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/loginselector"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/profile_picture_header" />
+
+            <ImageView
+                android:id="@+id/imgEditProfilePicture"
+                android:background="@drawable/profile_picture_test_image"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/imgEditProfilePictureOverlay"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/profile_picture_overlay"/>
+
+            <ImageButton
+                android:id="@+id/btnMainEditEditProfileImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toEndOf="@+id/imgEditProfilePictureOverlay"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/ic_edit_profile_picture"
+                />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
