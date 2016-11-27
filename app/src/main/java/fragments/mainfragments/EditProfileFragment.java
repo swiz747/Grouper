@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,11 +73,17 @@ public class EditProfileFragment extends Fragment{
     private ImageButton btnEditProfileImage;
     private ImageView imgProfileImage;
     private Spinner spnState;
+    private SeekBar sldGender;
+    private TextView txtMalePercentage;
+    private TextView txtFemalePercentage;
 
     private int age;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_edit_profile_fragment, container, false);
+
+        final int femalePercent = 50;
+        int malePercent = 50;
 
         Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
         SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -90,6 +97,9 @@ public class EditProfileFragment extends Fragment{
         btnEditProfileImage = (ImageButton) view.findViewById(R.id.btnMainEditEditProfileImage);
         imgProfileImage = (ImageView) view.findViewById(R.id.imgEditProfilePicture);
         txtBirthDaytext = (TextView) view.findViewById(R.id.txtMainEditProfileBirthday);
+        sldGender = (SeekBar) view.findViewById(R.id.sldMainEditProfileGenderBar);
+        txtMalePercentage = (TextView) view.findViewById(R.id.txtEditProfileMalePercentage);
+        txtFemalePercentage = (TextView) view.findViewById(R.id.txtEditProfileFemalePercentage);
 
         txtUserName.setTypeface(sab);
         txtState.setTypeface(sab);
@@ -105,6 +115,14 @@ public class EditProfileFragment extends Fragment{
         spnState.setAdapter(adapter);
 
         txtBirthday.setFocusable(false);
+
+        sldGender.setProgress(50);
+        sldGender.setMax(100);
+
+        txtMalePercentage.setText(malePercent + "%");
+        txtFemalePercentage.setText(femalePercent + "%");
+
+        int progress = sldGender.getProgress();
 
         //TODO: same deal as before, don't use shared pref to obtain this data -KD
         String username = sharedPref.getString("username", "");
@@ -153,6 +171,31 @@ public class EditProfileFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 saveProfileInfo();
+            }
+        });
+
+        sldGender.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int malePercentage;
+                int femalePercentage;
+                progress = ((int)Math.round(progress/10))*10;
+                seekBar.setProgress(progress);
+                malePercentage = 100 - progress;
+                femalePercentage = progress;
+                txtMalePercentage.setText(malePercentage + "%");
+                txtFemalePercentage.setText(femalePercentage + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(final SeekBar seekBar) {
+
             }
         });
 
