@@ -53,10 +53,6 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-/**
- * Created by Kyle on 11/26/2016.
- */
-
 public class EditProfileFragment extends Fragment{
 
     private static final int SELECT_SINGLE_PICTURE = 101;

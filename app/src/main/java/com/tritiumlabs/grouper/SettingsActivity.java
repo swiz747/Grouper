@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import fragments.settingsfragments.AccountFragment;
 import fragments.settingsfragments.DefaultFragment;
+import fragments.settingsfragments.SecurityFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnPrivacy;
     Button btnThemes;
     Button btnNotifications;
+    Button btnSecurity;
     FragmentManager manager;
 
     public String currentFrag;
@@ -30,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         //Objects
         btnAccount = (Button)findViewById(R.id.btnAccount);
+        btnSecurity = (Button)findViewById(R.id.btnSettingsSecurity);
 
         //Listeners
         btnAccount.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +43,18 @@ public class SettingsActivity extends AppCompatActivity {
 
                 } else {
                     openAccountFragment();
+                }
+            }
+        });
+
+        btnSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SecurityFragment securityFragment = (SecurityFragment)getSupportFragmentManager().findFragmentByTag("SecurityFragment");
+                if (securityFragment != null && securityFragment.isVisible()) {
+
+                } else {
+                    openSecurityFragment();
                 }
             }
         });
@@ -73,6 +88,17 @@ public class SettingsActivity extends AppCompatActivity {
         AccountFragment accountFragment = new AccountFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
         transaction.replace(R.id.fragContainerSettings, accountFragment, "AccountFragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void openSecurityFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        SecurityFragment securityFragment = new SecurityFragment();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
+        transaction.replace(R.id.fragContainerSettings, securityFragment, "SecurityFragment");
         transaction.addToBackStack(null);
         transaction.commit();
     }

@@ -49,6 +49,13 @@
                     android:textSize="9dp"
                     android:id="@+id/btnNotifications"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Security"
+                    android:id="@+id/btnSettingsSecurity"
+                    />
+
             </LinearLayout>
 
         </ScrollView>

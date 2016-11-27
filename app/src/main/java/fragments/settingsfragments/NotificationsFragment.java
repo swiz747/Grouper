@@ -1,4 +1,8 @@
 package fragments.settingsfragments;
 
-public class NotificationsFragment {
+
+import android.support.v4.app.Fragment;
+
+public class NotificationsFragment extends Fragment {
+
 }

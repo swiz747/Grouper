@@ -6,6 +6,7 @@
     <color name="primary_darkest">#0E125B</color>
     <color name="primary_darkest_translucent">#660E125B</color>
     <color name="accent">#42d1d6</color>
+    <color name="borderColor">#418DB0</color>
 
     <color name="black">#000000</color>
     <color name="jet">#222222</color>
