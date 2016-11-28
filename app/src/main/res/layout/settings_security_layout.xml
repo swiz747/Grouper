@@ -52,7 +52,7 @@
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/settingsSecurityViewingPrivacyText"
-            android:id="@+id/myRadioGroup"
+            android:id="@+id/radgroupViewingPrivacy"
             android:checkedButton="@+id/rbtnSettingsSecurityViewingPrivacyPublic"
             android:layout_margin="10dp"
             >
@@ -71,6 +71,70 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rbtnSettingsSecurityViewingPrivacyFriends"
                 android:text="Friends"
+                android:textColor="@color/primary_darkest"
+                />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/settingsSecurityFriendRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Friend Request"
+        android:clickable="true"
+        android:textSize="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border"
+        android:textColor="@color/primary_darkest"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlaySettingsSecurityFriendRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <TextView
+            android:id="@+id/settingsSecurityFriendRequestText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How do you want to handle friend requests?"
+            android:textSize="15dp"
+            android:textColor="@color/primary_darkest"
+            android:paddingLeft="12dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <RadioGroup
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settingsSecurityFriendRequestText"
+            android:id="@+id/radgroupFriendRequest"
+            android:checkedButton="@+id/rbtnSettingsSecurityViewingPrivacyPublic"
+            android:layout_margin="10dp"
+            >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbtnSettingsSecurityFriendRequestApprove"
+                android:text="Require Approval"
+                android:textColor="@color/primary_darkest"
+
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbtnSettingsSecurityFriendRequestAutoAccept"
+                android:text="Auto-Accept"
                 android:textColor="@color/primary_darkest"
                 />
 
