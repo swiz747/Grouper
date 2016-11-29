@@ -13,6 +13,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,10 @@ import java.io.FileNotFoundException;
 import static android.R.attr.path;
 
 public class ProfileFragment extends Fragment {
+
+    public ProfileFragment() {
+        setHasOptionsMenu(true);
+    }
 
     public static final String ITEM_NAME = "itemName";
     public static final String ITEM_RESOURCE_ID = "itemID";
@@ -108,7 +114,21 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        setHasOptionsMenu(true);
+
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_profile_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void openEditProfile() {

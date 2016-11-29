@@ -34,8 +34,8 @@ public class AccountFragment extends Fragment {
     AccountManager accountManager = AccountManager.getInstance(MyXMPP.connection);
 
     TextView txtHeaderText;
-    Button btnChangeEmail;
-    Button btnChangePassword;
+    TextView btnChangeEmail;
+    TextView btnChangePassword;
     Button btnDeleteAccount;
 
     private String inputText = "";
@@ -49,14 +49,12 @@ public class AccountFragment extends Fragment {
         accountManager.sensitiveOperationOverInsecureConnection(true);
 
         //UI objects
-        txtHeaderText = (TextView)view.findViewById(R.id.txtAccount);
+        txtHeaderText = (TextView)view.findViewById(R.id.settingsAccountText);
         txtHeaderText.setTypeface(sab);
-        btnChangeEmail = (Button)view.findViewById(R.id.btnChangeEmail);
+        btnChangeEmail = (TextView)view.findViewById(R.id.txtSettingsAccountChangeEmail);
         btnChangeEmail.setTypeface(sab);
-        btnChangePassword = (Button)view.findViewById(R.id.btnChangePassword);
+        btnChangePassword = (TextView)view.findViewById(R.id.txtSettingsAccountChangePassword);
         btnChangePassword.setTypeface(sab);
-        btnDeleteAccount = (Button)view.findViewById(R.id.btnDeleteAccount);
-        btnDeleteAccount.setTypeface(sab);
 
         //Listeners
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +68,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 inputBox("Enter your new email:", "emailchange");
-            }
-        });
-
-        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inputBox("Enter your current Password:", "deleteaccount");
             }
         });
 

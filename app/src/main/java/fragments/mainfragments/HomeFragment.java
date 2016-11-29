@@ -117,7 +117,6 @@ public class HomeFragment extends Fragment{
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
         final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
 
-
         call.enqueue(new Callback<List<ExternalDBResponse>>() {
             @Override
             public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
