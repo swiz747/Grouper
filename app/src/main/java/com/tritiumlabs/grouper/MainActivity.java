@@ -44,6 +44,7 @@ import fragments.LoginFragment;
 import fragments.groupiefragments.CreateGroupieFragment;
 import fragments.groupiefragments.DeleteGroupieFragment;
 import fragments.groupiefragments.EditGroupieFragment;
+import fragments.mainfragments.EditProfileFragment;
 import fragments.mainfragments.FriendsFragment;
 import fragments.mainfragments.GroupChatFragment;
 import fragments.mainfragments.GroupiesFragment;
@@ -167,10 +168,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("HomeFragment");
+        EditProfileFragment editProfileFragment = (EditProfileFragment) getSupportFragmentManager().findFragmentByTag("EditProfileFragment");
         if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
         } else if (homeFragment != null && homeFragment.isVisible()) {
             this.moveTaskToBack(true);
+        } else if (editProfileFragment != null && editProfileFragment.isVisible()) {
+            openProfileFragment(4);
         } else {
             openHomeFragmentInitial();
         }
@@ -211,8 +215,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override

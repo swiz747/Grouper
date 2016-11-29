@@ -127,8 +127,9 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main_profile_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main_profile_menu, menu);
     }
 
     private void openEditProfile() {
@@ -137,7 +138,7 @@ public class ProfileFragment extends Fragment {
 
         EditProfileFragment editProfileFragment = new EditProfileFragment();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.fragContainerMain, editProfileFragment, "DefaultFragment");
+        transaction.replace(R.id.fragContainerMain, editProfileFragment, "EditProfileFragment");
         transaction.addToBackStack(null);
         transaction.commit();
     }

@@ -66,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (defaultFragment != null && defaultFragment.isVisible()) {
             finish();
         } else {
-            super.onBackPressed();
+            openDefaultFragment();
         }
     }
 
