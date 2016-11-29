@@ -208,8 +208,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.mystery) {
             openMapFragment();
             return true;
-        } else if (id == R.id.refresh) {
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
