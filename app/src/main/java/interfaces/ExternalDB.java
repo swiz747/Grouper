@@ -12,12 +12,17 @@ import java.util.List;
 
 
 import objects.ExternalDBResponse;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ExternalDB
 {
@@ -100,6 +105,30 @@ public interface ExternalDB
     @POST("nucleus/db/createGroupie.php")
     Call<List<ExternalDBResponse>> createGroupie(
             @Field("groupieCreationString") String groupieCreationString);
+
+    @FormUrlEncoded
+    @POST("nucleus/db/createEditProfile.php")
+    Call<List<ExternalDBResponse>> editProfile(
+            @Field("groupieCreationString") String groupieCreationString);
+
+
+    //TODO dont use this yet -AB
+    @Multipart
+    @POST("nucleus/db/uploadPicture.php")
+    Call<List<ExternalDBResponse>> uploadProfilePicture (
+            @Part("username") RequestBody username,
+            @Part("type") RequestBody type,
+            @Part MultipartBody.Part file);
+
+
+
+    //can use this but wont return anything of use
+    @FormUrlEncoded
+    @POST("nucleus/db/uploadProfilePic.php")
+    Call<List<ExternalDBResponse>> requestProfilePicture(
+            @Field("username") String username);
+
+
 
     //TODO rmember to change all of these IPs when we move to a domain name -AB
     Retrofit retrofit = new Retrofit.Builder()

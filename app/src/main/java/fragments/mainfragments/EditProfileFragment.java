@@ -45,13 +45,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import fragments.DatePickerFragment;
+import interfaces.ExternalDB;
+import objects.ExternalDBResponse;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static interfaces.ExternalDB.retrofit;
 
 public class EditProfileFragment extends Fragment{
 
@@ -142,6 +153,8 @@ public class EditProfileFragment extends Fragment{
         {
             e.printStackTrace();
         }
+
+
 
         btnEditProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +260,8 @@ public class EditProfileFragment extends Fragment{
         imgProfileImage.buildDrawingCache();
         Bitmap image = imgProfileImage.getDrawingCache();
         saveToInternalStorage(image);
+        //TODO just added this hot shit right hynah -AB
+        saveToExternalStorage(image);
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -279,6 +294,46 @@ public class EditProfileFragment extends Fragment{
             }
         }
         return directory.getAbsolutePath();
+    }
+    //TODO the php works, we just need to use my function to upload -AB
+    private void saveToExternalStorage(Bitmap bitmapImage)
+    {
+        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File file=new File(directory,"profile.jpg");
+
+        RequestBody fbody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("fileToUpload", file.getName(), fbody);
+        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), "usernameHere");
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "type");
+
+        ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
+        final Call<List<ExternalDBResponse>> call = dbInterface.uploadProfilePicture(username, type, image);
+
+        call.enqueue(new Callback<List<ExternalDBResponse>>() {
+            @Override
+            public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
+            {
+                Log.d("response: ", response.toString());
+                Log.d("response: ", response.message());
+                Log.d("response: ", (Integer.toString(response.code())));
+
+                Log.d("response: ", response.body().get(0).getMainResponse());
+                Log.d("response: ", response.body().get(0).getResponseCode());
+                Log.d("response: ", response.body().get(0).getResponseMessage());
+                Log.d("response: ", response.body().get(0).getEchoInput());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t)
+            {
+                Log.d("Tracker", t.getMessage());
+            }
+        });
     }
 
     //TODO: This check must be made if we decide to not require the user to allow camera permissions by default through google play - as of right now it is required -KD

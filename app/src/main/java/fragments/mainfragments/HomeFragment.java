@@ -151,7 +151,6 @@ public class HomeFragment extends Fragment{
 
 
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        //TODO change username to be dynamic -AB
         final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
 
 
@@ -177,7 +176,7 @@ public class HomeFragment extends Fragment{
             public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t) {
 
 
-                Log.d("Tracker", t.getMessage());
+                Log.d("HomeFrag", t.getMessage());
             }
         });
 
