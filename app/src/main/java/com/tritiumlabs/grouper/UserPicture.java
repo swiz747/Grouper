@@ -30,7 +30,7 @@ import java.io.InvalidObjectException;
 
 public class UserPicture {
 
-    static int MAX_WIDTH = 600;
+    static int MAX_WIDTH = 800;
     static int MAX_HEIGHT = 800;
     Uri uri;
     ContentResolver resolver;

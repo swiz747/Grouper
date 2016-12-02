@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     private MyService mService;
 
-    private static int lastClicked = 0;
-
     //TODO Check shared preferences, see if already logged in.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,13 +372,13 @@ public class MainActivity extends AppCompatActivity {
     private void openFriendAdd() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragContainer, new FriendAddFragment()).addToBackStack("addFriend").commit();
+        transaction.replace(R.id.fragContainerMain, new FriendAddFragment()).addToBackStack("addFriend").commit();
     }
 
     public void openFriendsList() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragContainer, new FriendsListFragment()).addToBackStack("friendslist").commit();
+        transaction.replace(R.id.fragContainerMain, new FriendsListFragment()).addToBackStack("friendslist").commit();
     }
 
     public void openLogin() {

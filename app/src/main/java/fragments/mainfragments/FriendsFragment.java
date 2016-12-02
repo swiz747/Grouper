@@ -50,7 +50,7 @@ public class FriendsFragment extends Fragment {
                 toFragment.setArguments(args);
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragContainer, toFragment, "chats")
+                        .replace(R.id.fragContainerMain, toFragment, "chats")
                         .addToBackStack("chats").commit();
             }
         });

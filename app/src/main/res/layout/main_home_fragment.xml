@@ -1,154 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtHomeWelcomeBack"
+    <ScrollView
+        android:id="@+id/scrMainHomeFragmentMainScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Welcome Back!"
-        android:layout_marginTop="20dp"
-        android:textSize="35dp"
-        android:textColor="@color/primary_darkest"
-        />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imgHomeProfileImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/textbox"
-            />
+            <TextView
+                android:id="@+id/txtMainHomeFragmentTextHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Welcome Back!"
+                android:layout_marginTop="20dp"
+                android:textSize="35dp"
+                android:textColor="@color/primary_darkest"
+                />
 
-        <TextView
-            android:id="@+id/txtHomeUserName"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="75dp"
-            android:text="UserName"
-            android:textSize="30dp"
-            android:textColor="@color/primary_darkest"
-            />
+            <RelativeLayout
+                android:id="@+id/MainHomeFragmentHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/imgMainHomeFragmentProfileImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/textbox"
+                    android:padding="3dp"
+                    />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/txtMainHomeFragmentUsername"
+                    android:layout_width="220dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginStart="90dp"
+                    android:text="UserName"
+                    android:textSize="30dp"
+                    android:textColor="@color/primary_darkest"
+                    />
 
-        <TextView
-            android:id="@+id/txtHomeCityState"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="115dp"
-            android:layout_marginStart="100dp"
-            android:text="City, State"
-            android:textSize="25dp"
-            android:textColor="@color/primary_darkest_translucent"
-            />
+                <TextView
+                    android:id="@+id/txtMainHomeFragmentUserState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="90dp"
+                    android:text="State"
+                    android:textSize="20dp"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_below="@+id/txtMainHomeFragmentUsername"
+                    />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/txtMainHomeFragmentUserAge"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="21"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_below="@+id/imgMainHomeFragmentProfileImage"
+                    />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/txtMainHomeFragmentUserBirthday"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="6/18/1993"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_below="@+id/txtMainHomeFragmentUserAge"
+                    />
 
-        <TextView
-            android:id="@+id/txtHomeUserbio"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="This is a user bio."
-            android:textSize="18dp"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:gravity="top|left"
-            android:layout_marginTop="155dp"
-            android:layout_marginStart="95dp"
-            android:textColor="@color/primary_darkest"
-            />
+                <TextView
+                    android:id="@+id/txtMainHomeFragmentUserGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50% Male\n50% Female"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_below="@+id/txtMainHomeFragmentUserBirthday"
+                    />
 
-        <TextView
-            android:id="@+id/txtHomeUserinfo"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="165dp"
-            android:layout_marginEnd="230dp"
-            android:text="21\nMale\n11/23/2016"
-            android:textColor="@color/primary_darkest"
-            />
+                <ScrollView
+                    android:id="@+id/scrMainHomeFragmentSubScrollView"
+                    android:layout_width="215dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/txtMainHomeFragmentUserState">
 
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txtMainHomeFragmentUserBio"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="This is a user bio."
+                        android:textSize="16dp"
+                        android:inputType="textMultiLine"
+                        android:maxLength="300"
+                        android:gravity="top|left"
+                        android:textColor="@color/primary_darkest"
+                        />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+                </ScrollView>
 
-        <View
-            android:id="@+id/seperatorNorth"
-            android:layout_width="300dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="120dp"
-            android:background="#FFFFFF"
-            android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txtAreaCount"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:text="0 Friends online"
-            android:gravity="center"
-            android:textSize="25dp"
-            android:layout_below="@+id/seperatorNorth"
-            android:textColor="@color/primary_darkest"
-            />
+            <RelativeLayout
+                android:id="@+id/rlayMainHomeFragmentUsers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_below="@+id/MainHomeFragmentHeader">
 
-        <Button
-            android:id="@+id/btnViewFriends"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:text="View Friends"
-            android:layout_below="@id/txtAreaCount"
-            />
 
-        <View
-            android:id="@+id/seperatorSouth"
-            android:layout_width="300dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/btnViewFriends"
-            />
+                <View
+                    android:id="@+id/seperatorNorth"
+                    android:layout_width="300dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/txtHomeRecentActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/seperatorSouth"
-            android:layout_marginTop="10dp"
-            android:text="Recent Activity"
-            android:gravity="center"
-            android:textSize="25dp"
-            android:textColor="@color/primary_darkest"
-            />
+                <TextView
+                    android:id="@+id/txtAreaCount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="0 Friends online"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_below="@+id/seperatorNorth"
+                    />
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/btnViewFriends"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="View Friends"
+                    android:layout_below="@id/txtAreaCount"
+                    />
+
+                <View
+                    android:id="@+id/seperatorSouth"
+                    android:layout_width="300dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/btnViewFriends"
+                    />
+
+                <TextView
+                    android:id="@+id/txtHomeRecentActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/seperatorSouth"
+                    android:layout_marginTop="10dp"
+                    android:text="Recent Activity"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/primary_darkest"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
 
 </RelativeLayout>

@@ -30,16 +30,6 @@
                 android:layout_marginTop="225dp"
                 android:gravity="center">
 
-                <TextView
-                    android:id="@+id/txtMainEditProfileState"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="State: "
-                    android:textSize="25dp"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/primary_darkest"
-                    />
-
                 <Spinner
                     android:id="@+id/spnState"
                     android:layout_marginStart="42dp"
@@ -50,6 +40,17 @@
                     android:layout_toEndOf="@+id/txtMainEditProfileState"
                     >
                 </Spinner>
+
+                <TextView
+                    android:id="@+id/txtMainEditProfileState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="State: "
+                    android:textSize="25dp"
+                    android:layout_marginRight="35dp"
+                    android:textColor="@color/primary_darkest"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"/>
 
             </RelativeLayout>
 
@@ -67,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="Birthday: "
                     android:textSize="25dp"
+                    android:layout_marginRight="35dp"
                     android:layout_centerVertical="true"
                     android:textColor="@color/primary_darkest"
                     />
@@ -177,7 +179,7 @@
                     android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:inputType="textMultiLine"
-                    android:lines="8"
+                    android:maxLength="300"
                     android:textColor="@color/primary_darkest"
                     android:textColorHint="#600E125B"
                     android:textCursorDrawable="@null"

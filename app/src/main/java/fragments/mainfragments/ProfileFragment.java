@@ -43,8 +43,9 @@ public class ProfileFragment extends Fragment {
 
     TextView txtUserName;
     TextView txtState;
-    TextView txtAgeGender;
+    TextView txtAge;
     TextView txtUserBio;
+    TextView txtGender;
     ImageButton btnEditProfile;
     ImageView imgProfilePicture;
 
@@ -58,20 +59,24 @@ public class ProfileFragment extends Fragment {
 
         txtUserName = (TextView) view.findViewById(R.id.txtMainProfileUsername);
         txtState = (TextView) view.findViewById(R.id.txtMainProfileState);
-        txtAgeGender = (TextView) view.findViewById(R.id.txtMainProfileAgeGender);
+        txtAge = (TextView) view.findViewById(R.id.txtMainProfileAge);
+        txtGender = (TextView) view.findViewById(R.id.txtMainProfileGender);
         txtUserBio = (TextView) view.findViewById(R.id.txtMainProfileBio);
         btnEditProfile = (ImageButton) view.findViewById(R.id.btnMainProfileEditProfile);
 
         txtUserName.setTypeface(sab);
         txtState.setTypeface(sab);
-        //txtAgeGender.setTypeface(sab);
+        //txtAge.setTypeface(sab);
+        //txtGender.setTypeface(sab);
         txtUserBio.setTypeface(sab);
 
         //TODO: same deal as before, don't use shared pref to obtain this data -KD
         String username = sharedPref.getString("username", "");
-        String citystate = sharedPref.getString("citystate", "");
+        String citystate = sharedPref.getString("state", "");
         String userbio = sharedPref.getString("userbio", "");
-        String userage = String.valueOf(sharedPref.getInt("userage", 0));
+        int userage = sharedPref.getInt("userage", 0);
+        int malePercent = sharedPref.getInt("malepercent", 0);
+        int femalePercent = sharedPref.getInt("femalepercent", 0);
 
 
         txtUserName.setText(username);
@@ -88,10 +93,16 @@ public class ProfileFragment extends Fragment {
             txtUserBio.setText(userbio);
         }
 
-        if (userage.equals("")) {
-            txtAgeGender.setText("");
+        if (userage == 0) {
+            txtAge.setText("Age Unknown");
         } else {
-            txtAgeGender.setText(userage + ", Male");
+            txtAge.setText(String.valueOf(userage));
+        }
+
+        if (malePercent == 0 && femalePercent == 0) {
+            txtGender.setText("? Male | ? Female");
+        } else {
+            txtGender.setText(malePercent + "% Male | " + femalePercent + "% Female");
         }
 
         try {

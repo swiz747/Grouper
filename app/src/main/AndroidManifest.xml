@@ -19,7 +19,8 @@
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.SplashTheme">
+            android:theme="@style/AppTheme.SplashTheme"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,22 +31,26 @@
         <activity
             android:name=".StarterActivity"
             android:theme="@style/AppTheme.Dark"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:configChanges="orientation|screenSize">
         </activity>
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.Dark">
+            android:theme="@style/AppTheme.Dark"
+            android:configChanges="orientation|screenSize">
         </activity>
 
         <activity
             android:name=".GroupieActivity"
-            android:theme="@style/AppTheme.Dark">
+            android:theme="@style/AppTheme.Dark"
+            android:configChanges="orientation|screenSize">
         </activity>
 
         <activity
             android:name=".SettingsActivity"
-            android:theme="@style/AppTheme.Dark">
+            android:theme="@style/AppTheme.Dark"
+            android:configChanges="orientation|screenSize">
         </activity>
 
         <service

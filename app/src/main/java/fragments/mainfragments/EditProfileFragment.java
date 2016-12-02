@@ -84,16 +84,19 @@ public class EditProfileFragment extends Fragment{
     private TextView txtMalePercentage;
     private TextView txtFemalePercentage;
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor prefEditor;
+
     private int age;
+    private String[] statesArray = populateStatesArray();
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_edit_profile_fragment, container, false);
 
-        final int femalePercent = 50;
-        int malePercent = 50;
+        sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        prefEditor = sharedPref.edit();
 
         Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         txtUserName = (TextView) view.findViewById(R.id.txtMainEditProfileUsername);
         txtState = (TextView) view.findViewById(R.id.txtMainEditProfileState);
@@ -110,32 +113,38 @@ public class EditProfileFragment extends Fragment{
 
         txtUserName.setTypeface(sab);
         txtState.setTypeface(sab);
-        txtBirthday.setTypeface(sab);
+        //txtBirthday.setTypeface(sab);
         txtGender.setTypeface(sab);
         txtBio.setTypeface(sab);
         txtBirthDaytext.setTypeface(sab);
 
         spnState = (Spinner) view.findViewById(R.id.spnState);
-        String[] states = populateStatesArray();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, states);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, statesArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnState.setAdapter(adapter);
+        spnState.setSelection(sharedPref.getInt("stateindex", 0));
 
         txtBirthday.setFocusable(false);
-
-        sldGender.setProgress(50);
         sldGender.setMax(100);
-
-        txtMalePercentage.setText(malePercent + "%");
-        txtFemalePercentage.setText(femalePercent + "%");
 
         int progress = sldGender.getProgress();
 
         //TODO: same deal as before, don't use shared pref to obtain this data -KD
         String username = sharedPref.getString("username", "");
-        String citystate = sharedPref.getString("citystate", "");
         String userbio = sharedPref.getString("userbio", "");
         String userage = String.valueOf(sharedPref.getInt("userage", 0));
+        String userbirthday = sharedPref.getString("userbirthday", "");
+        int userMalePercent = sharedPref.getInt("malepercent", 0);
+        int userFemalePercent = sharedPref.getInt("femalepercent", 0);
+        age = sharedPref.getInt("userage", 0);
+
+        int malePercent = userMalePercent;
+        int femalePercent = userFemalePercent;
+
+        txtBirthday.setText(userbirthday);
+        sldGender.setProgress(userFemalePercent);
+        txtMalePercentage.setText(malePercent + "%");
+        txtFemalePercentage.setText(femalePercent + "%");
 
         txtUserName.setText(username);
 
@@ -263,21 +272,28 @@ public class EditProfileFragment extends Fragment{
         //TODO just added this hot shit right hynah -AB
         saveToExternalStorage(image);
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        String malePercentage = txtMalePercentage.getText().toString();
+        String femalePercentage = txtFemalePercentage.getText().toString();
 
-        editor.putInt("userage", age);
-        editor.putString("citystate", spnState.getSelectedItem().toString());
-        editor.putString("userbio", txtBio.getText().toString());
+        malePercentage = malePercentage.replaceAll("[^\\d.]", "");
+        femalePercentage = femalePercentage.replaceAll("[^\\d.]", "");
 
-        editor.apply();
+        Log.d("Edit frag", txtBirthday.getText().toString());
+
+        prefEditor.putInt("userage", age);
+        prefEditor.putString("state", spnState.getSelectedItem().toString());
+        prefEditor.putInt("stateindex", spnState.getSelectedItemPosition());
+        prefEditor.putString("userbirthday", txtBirthday.getText().toString());
+        prefEditor.putString("userbio", txtBio.getText().toString());
+        prefEditor.putInt("malepercent", Integer.valueOf(malePercentage));
+        prefEditor.putInt("femalepercent", Integer.valueOf(femalePercentage));
+
+        prefEditor.apply();
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
         File mypath=new File(directory,"profile.jpg");
 
         FileOutputStream fos = null;
@@ -295,6 +311,7 @@ public class EditProfileFragment extends Fragment{
         }
         return directory.getAbsolutePath();
     }
+
     //TODO the php works, we just need to use my function to upload -AB
     private void saveToExternalStorage(Bitmap bitmapImage)
     {
