@@ -46,6 +46,7 @@ public interface ExternalDB
     @FormUrlEncoded
     @POST("nucleus/db/requestPeopleCount.php")
     Call<List<ExternalDBResponse>> getAreaCount(
+            @Field("username") String username,
             @Field("longitude") double longitude,
             @Field("latitude") double latitude,
             @Field("gridsize") double gridsize);
@@ -112,7 +113,7 @@ public interface ExternalDB
             @Field("groupieCreationString") String groupieCreationString);
 
 
-    //TODO dont use this yet -AB
+    //in theory we can use this to upload any picture
     @Multipart
     @POST("nucleus/db/uploadPicture.php")
     Call<List<ExternalDBResponse>> uploadProfilePicture (

@@ -35,6 +35,7 @@ import java.util.List;
 
 import interfaces.ExternalDB;
 import objects.ExternalDBResponse;
+import objects.Groupie;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -115,7 +116,7 @@ public class HomeFragment extends Fragment{
         final TextView areaCount = (TextView) view.findViewById(R.id.txtAreaCount);
 
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
+        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount("usernameHere",5.0,5,2);
 
         call.enqueue(new Callback<List<ExternalDBResponse>>() {
             @Override
@@ -141,47 +142,31 @@ public class HomeFragment extends Fragment{
             }
         });
 
+        dildoTest();
+
         return view;
     }
 
-    //should probably be renamed
-    public ExternalDBResponse getNiggaCount()
+    private void dildoTest()
     {
-        final ExternalDBResponse returnResponse = new ExternalDBResponse();
+        Groupie derp = new Groupie();
+
+        derp.setGroupieName("groupiename");
+        derp.setGroupieCreator("testUser");
+        derp.setGroupieDescription("buttplug party, cum get sum fuk");
+        derp.setPrivateIndicator(false);
+        derp.setGroupieStartDate("12/01/2016");
+        derp.setGroupieStartTime("16:30");
+        derp.setGroupieEndDate("12/01/2016");
+        derp.setGroupieEndTime("20:00");
+        derp.setGroupieLat(41.696969);
+        derp.setGroupieLong(-71.424242);
+        derp.setGroupieAddress(null);
+
+        Log.d("DERP", derp.groupieCreationString());
 
 
-        ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        final Call<List<ExternalDBResponse>> call = dbInterface.getAreaCount(5.0,5,2);
-
-
-        call.enqueue(new Callback<List<ExternalDBResponse>>() {
-            @Override
-            public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
-            {
-
-                Log.d("response: ", response.body().get(0).getMainResponse());
-                Log.d("response: ", response.body().get(0).getResponseCode());
-                Log.d("response: ", response.body().get(0).getResponseMessage());
-                Log.d("response: ", response.body().get(0).getEchoInput());
-
-                returnResponse.setMainResponse(response.body().get(0).getMainResponse());
-                returnResponse.setResponseCode(response.body().get(0).getResponseCode());
-                returnResponse.setResponseMessage(response.body().get(0).getResponseMessage());
-                returnResponse.setEchoInput(response.body().get(0).getEchoInput());
-
-                Log.d("response: ", returnResponse.getMainResponse());
-            }
-
-            @Override
-            public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t) {
-
-
-                Log.d("HomeFrag", t.getMessage());
-            }
-        });
-
-
-        Log.d("response: test ", returnResponse.getMainResponse());
-        return returnResponse;
     }
+
+
 }

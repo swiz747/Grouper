@@ -93,7 +93,6 @@ public class Groupie {
         String returnString = "";
 
         returnString += this.groupieName + ",";
-        returnString += this.groupieName + ",";
         returnString += this.groupieCreator + ",";
         returnString += this.groupieDescription + ",";
         if (this.privateIndicator)
