@@ -171,16 +171,7 @@ public class HomeFragment extends Fragment{
 
         return view;
     }
-
-    private void requestDisallowParentInterceptTouchEvent(View __v, Boolean __disallowIntercept) {
-        while (__v.getParent() != null && __v.getParent() instanceof View) {
-            if (__v.getParent() instanceof ScrollView) {
-                __v.getParent().requestDisallowInterceptTouchEvent(__disallowIntercept);
-            }
-            __v = (View) __v.getParent();
-        }
-    }
-
+    
     private void dildoTest()
     {
         Groupie derp = new Groupie();
