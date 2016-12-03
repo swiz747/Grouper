@@ -1,6 +1,7 @@
-package fragments.mainfragments;
+package com.tritiumlabs.grouper;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -10,36 +11,49 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.tritiumlabs.grouper.MainActivity;
-import com.tritiumlabs.grouper.R;
-import com.tritiumlabs.grouper.UserPicture;
-
+import com.tritiumlabs.grouper.adapters.MainDrawerAdapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import fragments.DatePickerFragment;
+import fragments.FriendAddFragment;
+import fragments.FriendsListFragment;
+import fragments.mainfragments.FriendsFragment;
+import fragments.mainfragments.GroupChatFragment;
+import fragments.mainfragments.GroupiesFragment;
+import fragments.mainfragments.HomeFragment;
+import fragments.mainfragments.InboxFragment;
+import fragments.mainfragments.ProfileFragment;
 import interfaces.ExternalDB;
 import objects.ExternalDBResponse;
 import okhttp3.MediaType;
@@ -49,9 +63,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.app.Activity.RESULT_OK;
-
-public class EditProfileFragment extends Fragment{
+public class EditProfileActivity extends AppCompatActivity {
 
     private static final int SELECT_SINGLE_PICTURE = 101;
 
@@ -75,28 +87,84 @@ public class EditProfileFragment extends Fragment{
     private SharedPreferences.Editor prefEditor;
 
     private int age;
+    private int fragmentIndex = 0;
     private String[] statesArray = populateStatesArray();
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_edit_profile_fragment, container, false);
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
-        sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+    private CharSequence mDrawerTitle;
+    MainDrawerAdapter adapter;
+    List<MainDrawerItem> drawerDataList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.edit_profile_activity);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.editProfileToolbar);
+        setSupportActionBar(toolbar);
+
+        drawerDataList = new ArrayList<MainDrawerItem>();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.editProfile_drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.edit_profile_left_drawer);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+        drawerDataList.add(new MainDrawerItem("Home", R.drawable.homebutton));
+        drawerDataList.add(new MainDrawerItem("Inbox", R.drawable.inbox_button));
+        drawerDataList.add(new MainDrawerItem("FriendS", R.drawable.friends_button));
+        drawerDataList.add(new MainDrawerItem("Group Chat", R.drawable.group_chat_button));
+        drawerDataList.add(new MainDrawerItem("Profile", R.drawable.profile_button));
+        drawerDataList.add(new MainDrawerItem("Groupies", R.drawable.groupie_button));
+        drawerDataList.add(new MainDrawerItem("Settings", R.drawable.settings_button));
+        drawerDataList.add(new MainDrawerItem("Logout", R.drawable.logout_button));
+
+        adapter = new MainDrawerAdapter(this, R.layout.custom_drawer_item, drawerDataList);
+
+        mDrawerList.setAdapter(adapter);
+
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,
+                toolbar,
+                R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+        sharedPref = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         prefEditor = sharedPref.edit();
 
-        Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
+        Typeface sab = Typeface.createFromAsset(this.getAssets(), "Sabandija-font-ffp.ttf");
 
-        txtUserName = (TextView) view.findViewById(R.id.txtMainEditProfileUsername);
-        txtState = (TextView) view.findViewById(R.id.txtMainEditProfileState);
-        txtBirthday = (TextView) view.findViewById(R.id.txtMainEditProfileDateOfBirth);
-        txtGender = (TextView) view.findViewById(R.id.txtMainEditProfileGender);
-        txtBio = (EditText) view.findViewById(R.id.txtMainEditProfileBio);
-        btnSaveInfo = (ImageButton) view.findViewById(R.id.btnMainEditProfileSave);
-        btnEditProfileImage = (ImageButton) view.findViewById(R.id.btnMainEditEditProfileImage);
-        imgProfileImage = (ImageView) view.findViewById(R.id.imgEditProfilePicture);
-        txtBirthDaytext = (TextView) view.findViewById(R.id.txtMainEditProfileBirthday);
-        sldGender = (SeekBar) view.findViewById(R.id.sldMainEditProfileGenderBar);
-        txtMalePercentage = (TextView) view.findViewById(R.id.txtEditProfileMalePercentage);
-        txtFemalePercentage = (TextView) view.findViewById(R.id.txtEditProfileFemalePercentage);
+        txtUserName = (TextView) findViewById(R.id.txtEditProfileActivityUsername);
+        txtState = (TextView) findViewById(R.id.txtEditProfileActivityState);
+        txtBirthday = (TextView) findViewById(R.id.txtEditProfileActivityDateOfBirth);
+        txtGender = (TextView) findViewById(R.id.txtEditProfileActivityGender);
+        txtBio = (EditText) findViewById(R.id.txtEditProfileActivityProfileBio);
+        btnSaveInfo = (ImageButton) findViewById(R.id.btnEditProfileActivitySave);
+        btnEditProfileImage = (ImageButton) findViewById(R.id.btnEditProfileActivityEditProfileImage);
+        imgProfileImage = (ImageView) findViewById(R.id.imgEditProfileActivityProfilePicture);
+        txtBirthDaytext = (TextView) findViewById(R.id.txtEditProfileActivityBirthday);
+        sldGender = (SeekBar) findViewById(R.id.sldEditProfileActivityGenderBar);
+        txtMalePercentage = (TextView) findViewById(R.id.txtEditProfileActivityMalePercentage);
+        txtFemalePercentage = (TextView) findViewById(R.id.txtEditProfileActivityFemalePercentage);
 
         txtUserName.setTypeface(sab);
         txtState.setTypeface(sab);
@@ -105,8 +173,8 @@ public class EditProfileFragment extends Fragment{
         txtBio.setTypeface(sab);
         txtBirthDaytext.setTypeface(sab);
 
-        spnState = (Spinner) view.findViewById(R.id.spnEditProfileActivityState);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, statesArray);
+        spnState = (Spinner) findViewById(R.id.spnEditProfileActivityState);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, statesArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnState.setAdapter(adapter);
         spnState.setSelection(sharedPref.getInt("stateindex", 0));
@@ -138,19 +206,17 @@ public class EditProfileFragment extends Fragment{
         txtBio.setText(userbio);
 
         try {
-            ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+            ContextWrapper cw = new ContextWrapper(this.getApplicationContext());
             File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
             File f = new File(directory, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            imgProfileImage = (ImageView) view.findViewById(R.id.imgEditProfilePicture);
+            imgProfileImage = (ImageView) findViewById(R.id.imgEditProfileActivityProfilePicture);
             imgProfileImage.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
-
-
 
         btnEditProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,20 +270,43 @@ public class EditProfileFragment extends Fragment{
             }
         });
 
-        return view;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
 
+    private void sendMessage() {
+        Log.d("sender", "Broadcasting message");
+        Intent intent = new Intent("open-fragment");
+        // You can also include some extra data.
+        intent.putExtra("message", fragmentIndex);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void onDestroy() {
+        super.onDestroy();
+        sendMessage();
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -242,7 +331,7 @@ public class EditProfileFragment extends Fragment{
             return null;
         }
         String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getActivity().managedQuery(uri, projection, null, null, null);
+        Cursor cursor = this.managedQuery(uri, projection, null, null, null);
         if( cursor != null ){
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -276,10 +365,11 @@ public class EditProfileFragment extends Fragment{
         prefEditor.putInt("femalepercent", Integer.valueOf(femalePercentage));
 
         prefEditor.apply();
+
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        ContextWrapper cw = new ContextWrapper(this.getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         File mypath=new File(directory,"profile.jpg");
 
@@ -302,7 +392,7 @@ public class EditProfileFragment extends Fragment{
     //TODO the php works, we just need to use my function to upload -AB
     private void saveToExternalStorage(Bitmap bitmapImage)
     {
-        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        ContextWrapper cw = new ContextWrapper(this.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
@@ -328,8 +418,6 @@ public class EditProfileFragment extends Fragment{
                 Log.d("response: ", response.body().get(0).getResponseCode());
                 Log.d("response: ", response.body().get(0).getResponseMessage());
                 Log.d("response: ", response.body().get(0).getEchoInput());
-
-
             }
 
             @Override
@@ -340,18 +428,6 @@ public class EditProfileFragment extends Fragment{
         });
     }
 
-    //TODO: This check must be made if we decide to not require the user to allow camera permissions by default through google play - as of right now it is required -KD
-    /**
-    private boolean isDeviceSupportCamera() {
-        if (getApplicationContext().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-     */
-
     private void showDatePicker() {
         DatePickerFragment date = new DatePickerFragment();
         Calendar calender = Calendar.getInstance();
@@ -361,7 +437,7 @@ public class EditProfileFragment extends Fragment{
         args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
         date.setArguments(args);
         date.setCallBack(ondate);
-        date.show(getFragmentManager(), "Date Picker");
+        date.show(getSupportFragmentManager(), "Date Picker");
     }
 
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
@@ -377,6 +453,14 @@ public class EditProfileFragment extends Fragment{
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         age = year - birthYear;
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            fragmentIndex = position;
+            finish();
+        }
     }
 
     private String[] populateStatesArray() {
@@ -438,3 +522,5 @@ public class EditProfileFragment extends Fragment{
         return states;
     }
 }
+
+

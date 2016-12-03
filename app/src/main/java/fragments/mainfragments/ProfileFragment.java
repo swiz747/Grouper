@@ -2,6 +2,7 @@ package fragments.mainfragments;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,7 +25,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.tritiumlabs.grouper.EditProfileActivity;
 import com.tritiumlabs.grouper.R;
+import com.tritiumlabs.grouper.SettingsActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -144,6 +147,11 @@ public class ProfileFragment extends Fragment {
     }
 
     private void openEditProfile() {
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void openEditProfileFragment() {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 

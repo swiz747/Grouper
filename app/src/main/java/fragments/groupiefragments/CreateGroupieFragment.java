@@ -110,7 +110,7 @@ public class CreateGroupieFragment extends Fragment {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            txtDate.setText(String.valueOf(monthOfYear) + "/" + String.valueOf(dayOfMonth+1)
+            txtDate.setText(String.valueOf(monthOfYear+1) + "/" + String.valueOf(dayOfMonth)
                     + "/" + String.valueOf(year));
         }
     };

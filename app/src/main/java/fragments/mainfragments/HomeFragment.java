@@ -171,7 +171,7 @@ public class HomeFragment extends Fragment{
 
         return view;
     }
-    
+
     private void dildoTest()
     {
         Groupie derp = new Groupie();

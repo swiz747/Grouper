@@ -53,6 +53,12 @@
             android:configChanges="orientation|screenSize">
         </activity>
 
+        <activity
+            android:name=".EditProfileActivity"
+            android:theme="@style/AppTheme.Dark"
+            android:configChanges="orientation|screenSize">
+        </activity>
+
         <service
             android:name="com.tritiumlabs.grouper.MyService">
         </service>
