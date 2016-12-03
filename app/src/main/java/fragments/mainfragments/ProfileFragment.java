@@ -1,5 +1,6 @@
 package fragments.mainfragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -44,19 +45,21 @@ public class ProfileFragment extends Fragment {
     public static final String ITEM_NAME = "itemName";
     public static final String ITEM_RESOURCE_ID = "itemID";
 
-    TextView txtUserName;
-    TextView txtState;
-    TextView txtAge;
-    TextView txtUserBio;
-    TextView txtGender;
-    ImageButton btnEditProfile;
-    ImageView imgProfilePicture;
+    private static SharedPreferences sharedPref;
+
+    public static TextView txtUserName;
+    public static TextView txtState;
+    public static TextView txtAge;
+    public static TextView txtUserBio;
+    public static TextView txtGender;
+    public static ImageButton btnEditProfile;
+    public static ImageView imgProfilePicture;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_profile_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        sharedPref = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
 
@@ -80,7 +83,6 @@ public class ProfileFragment extends Fragment {
         int userage = sharedPref.getInt("userage", 0);
         int malePercent = sharedPref.getInt("malepercent", 0);
         int femalePercent = sharedPref.getInt("femalepercent", 0);
-
 
         txtUserName.setText(username);
 
@@ -133,6 +135,41 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    public static void refreshProfile() {
+        String username = sharedPref.getString("username", "");
+        String citystate = sharedPref.getString("state", "");
+        String userbio = sharedPref.getString("userbio", "");
+        int userage = sharedPref.getInt("userage", 0);
+        int malePercent = sharedPref.getInt("malepercent", 0);
+        int femalePercent = sharedPref.getInt("femalepercent", 0);
+
+        txtUserName.setText(username);
+
+        if (citystate.equals("")) {
+            txtState.setText("");
+        } else {
+            txtState.setText(citystate);
+        }
+
+        if (userbio.equals("")) {
+            txtUserBio.setText("");
+        } else {
+            txtUserBio.setText(userbio);
+        }
+
+        if (userage == 0) {
+            txtAge.setText("Age Unknown");
+        } else {
+            txtAge.setText(String.valueOf(userage));
+        }
+
+        if (malePercent == 0 && femalePercent == 0) {
+            txtGender.setText("? Male | ? Female");
+        } else {
+            txtGender.setText(malePercent + "% Male | " + femalePercent + "% Female");
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,17 +186,6 @@ public class ProfileFragment extends Fragment {
     private void openEditProfile() {
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
         startActivity(intent);
-    }
-
-    private void openEditProfileFragment() {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        EditProfileFragment editProfileFragment = new EditProfileFragment();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,  R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.fragContainerMain, editProfileFragment, "EditProfileFragment");
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     private String[] populateStatesArray() {

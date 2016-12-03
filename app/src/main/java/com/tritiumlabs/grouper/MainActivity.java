@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (position == 4) {
             if (profileFragment != null && profileFragment.isVisible()) {
-
+                ProfileFragment.refreshProfile();
             } else {
                 openProfileFragment(position);
             }

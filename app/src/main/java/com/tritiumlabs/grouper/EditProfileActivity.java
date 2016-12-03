@@ -200,9 +200,7 @@ public class EditProfileActivity extends AppCompatActivity {
         sldGender.setProgress(userFemalePercent);
         txtMalePercentage.setText(malePercent + "%");
         txtFemalePercentage.setText(femalePercent + "%");
-
         txtUserName.setText(username);
-
         txtBio.setText(userbio);
 
         try {
@@ -366,6 +364,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         prefEditor.apply();
 
+        fragmentIndex = 4;
+        finish();
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage){
