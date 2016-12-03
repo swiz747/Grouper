@@ -109,8 +109,8 @@ public interface ExternalDB
 
     @FormUrlEncoded
     @POST("nucleus/db/createEditProfile.php")
-    Call<List<ExternalDBResponse>> editProfile(
-            @Field("groupieCreationString") String groupieCreationString);
+    Call<List<ExternalDBResponse>> createEditProfile(
+            @Field("profileCreationString") String profileCreationString);
 
     //in theory we can use this to upload any picture
     @Multipart
