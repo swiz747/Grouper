@@ -112,7 +112,6 @@ public interface ExternalDB
     Call<List<ExternalDBResponse>> editProfile(
             @Field("groupieCreationString") String groupieCreationString);
 
-
     //in theory we can use this to upload any picture
     @Multipart
     @POST("nucleus/db/uploadPicture.php")
@@ -121,22 +120,15 @@ public interface ExternalDB
             @Part("type") RequestBody type,
             @Part MultipartBody.Part file);
 
-
-
     //can use this but wont return anything of use
     @FormUrlEncoded
     @POST("nucleus/db/uploadProfilePic.php")
     Call<List<ExternalDBResponse>> requestProfilePicture(
             @Field("username") String username);
 
-
-
     //TODO rmember to change all of these IPs when we move to a domain name -AB
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://45.35.4.171/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-
-
-
 }

@@ -77,38 +77,7 @@ public class ProfileFragment extends Fragment {
         txtUserBio.setTypeface(sab);
 
         //TODO: same deal as before, don't use shared pref to obtain this data -KD
-        String username = sharedPref.getString("username", "");
-        String citystate = sharedPref.getString("state", "");
-        String userbio = sharedPref.getString("userbio", "");
-        int userage = sharedPref.getInt("userage", 0);
-        int malePercent = sharedPref.getInt("malepercent", 0);
-        int femalePercent = sharedPref.getInt("femalepercent", 0);
-
-        txtUserName.setText(username);
-
-        if (citystate.equals("")) {
-            txtState.setText("");
-        } else {
-            txtState.setText(citystate);
-        }
-
-        if (userbio.equals("")) {
-            txtUserBio.setText("");
-        } else {
-            txtUserBio.setText(userbio);
-        }
-
-        if (userage == 0) {
-            txtAge.setText("Age Unknown");
-        } else {
-            txtAge.setText(String.valueOf(userage));
-        }
-
-        if (malePercent == 0 && femalePercent == 0) {
-            txtGender.setText("? Male | ? Female");
-        } else {
-            txtGender.setText(malePercent + "% Male | " + femalePercent + "% Female");
-        }
+        refreshProfile();
 
         try {
             ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
