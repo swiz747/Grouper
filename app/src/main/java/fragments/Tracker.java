@@ -28,6 +28,7 @@ import com.tritiumlabs.grouper.R;
 import java.util.ArrayList;
 import java.util.List;
 import interfaces.ExternalDB;
+import objects.ExternalDBResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -143,18 +144,18 @@ public class Tracker extends android.support.v4.app.Fragment {
     {
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
         //TODO change username to be dynamic -AB
-        final Call<List<LocationInfo>> call =
+        final Call<List<ExternalDBResponse>> call =
                 dbInterface.setLocation(dbHandler.getUsername(), latitude, longitude);
 
-        call.enqueue(new Callback<List<LocationInfo>>() {
+        call.enqueue(new Callback<List<ExternalDBResponse>>() {
             @Override
-            public void onResponse(Call<List<LocationInfo>> call, Response<List<LocationInfo>> response) {
+            public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response) {
 
 
             }
 
             @Override
-            public void onFailure(Call<List<LocationInfo>> call, Throwable t) {
+            public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t) {
 
 
                 Log.d("Tracker", t.getMessage());
