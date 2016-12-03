@@ -30,7 +30,7 @@ public class Profile {
         this.dob = dob;
         this.state = state;
         this.zip = zip;
-        this.bio = bio;
+        this.bio = commaReplacer(bio);
         this.genderName = genderName;
         this.genderMale = genderMale;
         this.genderFemale = genderFemale;
@@ -144,8 +144,34 @@ public class Profile {
         this.genderFemale = genderFemale;
     }
 
+    private String commaReplacer(String inString)
+    {
+        String returnString = "";
+        returnString = inString;
+        returnString = returnString.replaceAll("%\\$&69%",",");
+        returnString = returnString.replaceAll("[,]","dildoinmyass");
+
+
+        return returnString;
+    }
+
     public String profileCreationString()
     {
-        return null;
+        String returnString = "";
+
+
+         returnString += this.username + ",";
+         returnString += this.firstName + ",";
+         returnString += this.lastName + ",";
+         returnString += this.phone + ",";
+         returnString += this.email + ",";
+         returnString += this.dob + ",";
+         returnString += this.state + ",";
+         returnString += this.zip + ",";
+         returnString += commaReplacer(this.bio) + ","; //TODO remove any commas in here and replace them -AB
+         returnString += this.genderName + ",";
+         returnString += this.genderMale + ",";
+         returnString += this.genderFemale;
+        return returnString;
     }
 }
