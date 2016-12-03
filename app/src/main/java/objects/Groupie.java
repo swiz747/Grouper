@@ -40,6 +40,10 @@ public class Groupie {
         this.groupieAddress = groupieAddress;
     }
 
+    public Groupie(String creationString) {
+
+    }
+
     public Groupie() {
 
     }
