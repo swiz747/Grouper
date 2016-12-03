@@ -35,7 +35,6 @@ import retrofit2.Response;
 
 import static com.tritiumlabs.grouper.MyXMPP.dbHandler;
 
-
 public class Tracker extends android.support.v4.app.Fragment {
 
     private static final String MAP_FRAGMENT_TAG = "map";
@@ -55,8 +54,6 @@ public class Tracker extends android.support.v4.app.Fragment {
 
         mapView = (MapView) v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
-
 
         progress = new ProgressDialog(getActivity());
         locationRetriever = LocationRetriever.getInstance(getActivity());

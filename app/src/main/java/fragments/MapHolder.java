@@ -1,14 +1,19 @@
 package fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,9 +25,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tritiumlabs.grouper.R;
 
+import fragments.mainfragments.GroupiesFragment;
+
 @Deprecated
 public class MapHolder extends Fragment {
 
+    public View rootView;
+    public TouchableWrapper mTouchView;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -30,7 +39,10 @@ public class MapHolder extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Tritium Tracker");
-        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+        rootView = inflater.inflate(R.layout.fragment_map, container, false);
+
+        mTouchView = new TouchableWrapper(getActivity());
+        mTouchView.addView(rootView);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
@@ -80,7 +92,7 @@ public class MapHolder extends Fragment {
             }
         });
 
-        return rootView;
+        return mTouchView;
     }
 
     @Override
@@ -105,5 +117,30 @@ public class MapHolder extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    public class TouchableWrapper extends FrameLayout {
+
+        public TouchableWrapper(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent event) {
+
+            switch (event.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    GroupiesFragment.disableScroll();
+                    Log.v("Map Holder", "Scroll Disabled");
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    GroupiesFragment.enableScroll();
+                    Log.v("Map Holder", "Scroll Enabled");
+                    break;
+            }
+            return super.dispatchTouchEvent(event);
+        }
     }
 }
