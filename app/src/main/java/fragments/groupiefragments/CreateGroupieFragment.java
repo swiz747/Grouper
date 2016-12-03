@@ -100,7 +100,6 @@ public class CreateGroupieFragment extends Fragment {
         date.show(getFragmentManager(), "Date Picker");
     }
 
-
     private void showTimePicker() {
         TimePickerFragment time = new TimePickerFragment();
         time.show(getFragmentManager(), "TimePicker");
