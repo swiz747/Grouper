@@ -1,6 +1,7 @@
 package fragments.mainfragments;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.vision.text.Text;
 import com.tritiumlabs.grouper.GroupieActivity;
 import com.tritiumlabs.grouper.R;
+
+import fragments.MapHolder;
 
 public class GroupiesFragment extends Fragment {
 
@@ -22,15 +27,34 @@ public class GroupiesFragment extends Fragment {
     public static final String FRAG_POSITION = "position";
 
     ImageView activeFragIcon;
-    Button btnCreateGroupie;
+    TextView txtFindGroupiesText;
+    TextView txtCreateOwnGroupieText;
+    TextView txtCreateGroupie;
+    TextView txtEditGroupie;
+    TextView txtDeleteGroupie;
+    TextView getTxtEditGroupie;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_groupies_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Groupies");
 
-        btnCreateGroupie = (Button)view.findViewById(R.id.btnDatePicker);
+        Typeface sab = Typeface.createFromAsset(getActivity().getAssets(), "Sabandija-font-ffp.ttf");
 
-        btnCreateGroupie.setOnClickListener(
+        txtCreateGroupie = (TextView) view.findViewById(R.id.txtMainGroupiesFragmentCreateGroupie);
+        txtEditGroupie = (TextView)  view.findViewById(R.id.txtMainGroupiesFragmentEditGroupie);
+        txtDeleteGroupie = (TextView) view.findViewById(R.id.txtMainGroupiesFragmentDeleteGroupie);
+        txtCreateOwnGroupieText = (TextView) view.findViewById(R.id.txtMainGroupieFragmentFindGroupiesText);
+        txtFindGroupiesText = (TextView) view.findViewById(R.id.txtMainGroupieFragmentManageroupiesText);
+
+        txtCreateGroupie.setTypeface(sab);
+        txtEditGroupie.setTypeface(sab);
+        txtDeleteGroupie.setTypeface(sab);
+        txtCreateOwnGroupieText.setTypeface(sab);
+        txtFindGroupiesText.setTypeface(sab);
+
+        createMapFragment();
+
+        txtCreateGroupie.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -39,6 +63,12 @@ public class GroupiesFragment extends Fragment {
                 }
         );
         return view;
+    }
+
+    private void createMapFragment() {
+        Fragment mapFragment = new MapHolder();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragMainGroupieFragmentMapContainer, mapFragment).commit();
     }
 
     private void openCreateGroupiesFragment() {

@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Groupie"
-        android:layout_above="@+id/editText"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btnDatePicker" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtMainGroupieFragmentFindGroupiesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find Groupies near you!"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <TextView
+                android:id="@+id/txtMainGroupieFragmentManageroupiesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or create your own!"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/fragMainGroupieFragmentMapContainer"
+                android:textColor="@color/primary_darkest"
+                />
+
+            <TextView
+                android:id="@+id/txtMainGroupiesFragmentCreateGroupie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Create Groupie"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:textColor="@color/primary_darkest"
+                android:layout_below="@id/txtMainGroupieFragmentManageroupiesText"
+                />
+
+            <TextView
+                android:id="@+id/txtMainGroupiesFragmentEditGroupie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Edit Groupie"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:textColor="@color/primary_darkest"
+                android:layout_below="@id/txtMainGroupiesFragmentCreateGroupie"
+                />
+
+            <TextView
+                android:id="@+id/txtMainGroupiesFragmentDeleteGroupie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Delete Groupie"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:textColor="@color/primary_darkest"
+                android:layout_below="@id/txtMainGroupiesFragmentEditGroupie"
+                android:layout_marginBottom="20dp"
+                />
+
+            <FrameLayout
+                android:id="@+id/fragMainGroupieFragmentMapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/txtMainGroupieFragmentFindGroupiesText"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/border"
+                android:padding="2dp"
+                >
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

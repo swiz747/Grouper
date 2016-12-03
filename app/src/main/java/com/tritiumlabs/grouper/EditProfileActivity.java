@@ -267,7 +267,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
