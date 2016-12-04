@@ -204,12 +204,12 @@ public class Tracker extends android.support.v4.app.Fragment {
 
                 case MotionEvent.ACTION_DOWN:
                     GroupiesFragment.disableScroll();
-                    Log.v("Map Holder", "Scroll Disabled");
+                    Log.v(MAP_FRAGMENT_TAG, "Scroll Disabled");
                     break;
 
                 case MotionEvent.ACTION_UP:
                     GroupiesFragment.enableScroll();
-                    Log.v("Map Holder", "Scroll Enabled");
+                    Log.v(MAP_FRAGMENT_TAG, "Scroll Enabled");
                     break;
             }
             return super.dispatchTouchEvent(event);

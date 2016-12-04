@@ -299,7 +299,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private void sendMessage() {
         Log.d("sender", "Broadcasting message");
         Intent intent = new Intent("open-fragment");
-        // You can also include some extra data.
         intent.putExtra("message", fragmentIndex);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
