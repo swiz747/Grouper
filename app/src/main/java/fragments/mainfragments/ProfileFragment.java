@@ -55,6 +55,8 @@ public class ProfileFragment extends Fragment {
     public static ImageButton btnEditProfile;
     public static ImageView imgProfilePicture;
 
+    public static Activity activity;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_profile_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
@@ -69,6 +71,9 @@ public class ProfileFragment extends Fragment {
         txtGender = (TextView) view.findViewById(R.id.txtMainProfileGender);
         txtUserBio = (TextView) view.findViewById(R.id.txtMainProfileBio);
         btnEditProfile = (ImageButton) view.findViewById(R.id.btnMainProfileEditProfile);
+        imgProfilePicture = (ImageView) view.findViewById(R.id.imgProfilePicture);
+
+        activity = (Activity)view.getContext();
 
         txtUserName.setTypeface(sab);
         txtState.setTypeface(sab);
@@ -78,19 +83,6 @@ public class ProfileFragment extends Fragment {
 
         //TODO: same deal as before, don't use shared pref to obtain this data -KD
         refreshProfile();
-
-        try {
-            ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            File f = new File(directory, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            imgProfilePicture = (ImageView) view.findViewById(R.id.imgProfilePicture);
-            imgProfilePicture.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +128,18 @@ public class ProfileFragment extends Fragment {
             txtGender.setText("? Male | ? Female");
         } else {
             txtGender.setText(malePercent + "% Male | " + femalePercent + "% Female");
+        }
+
+        try {
+            ContextWrapper cw = new ContextWrapper(activity.getApplicationContext());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            imgProfilePicture.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
         }
     }
 

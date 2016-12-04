@@ -404,7 +404,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         RequestBody fbody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part image = MultipartBody.Part.createFormData("fileToUpload", file.getName(), fbody);
-        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), "usernameHere");
+        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), sharedPref.getString("username", ""));
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "type");
 
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);

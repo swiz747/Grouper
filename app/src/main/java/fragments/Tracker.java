@@ -125,7 +125,6 @@ public class Tracker extends android.support.v4.app.Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-
             }
         });
 
@@ -135,7 +134,6 @@ public class Tracker extends android.support.v4.app.Fragment {
     }
     public void setMapCamera()
     {
-
         Log.d("nigga", Double.toString(myLatitude) + " " + Double.toString(myLatitude));
         LatLng myLocation = new LatLng(myLatitude, myLongitude);
         CameraPosition cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(14).build();
