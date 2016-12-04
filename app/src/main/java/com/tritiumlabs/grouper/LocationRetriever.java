@@ -61,8 +61,6 @@ public class LocationRetriever implements
                 latitude = Double.toString(mLastLocation.getLatitude());
                 longitude = Double.toString(mLastLocation.getLongitude());
                 isDataReady = true;
-
-
             }
         } catch (SecurityException e) {
 

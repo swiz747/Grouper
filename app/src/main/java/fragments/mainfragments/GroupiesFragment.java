@@ -88,7 +88,7 @@ public class GroupiesFragment extends Fragment {
     }
 
     private void createMapFragment() {
-        Fragment trackerFragment = new MapHolder();
+        Fragment trackerFragment = new Tracker();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.fragMainGroupieFragmentMapContainer, trackerFragment).commit();
     }

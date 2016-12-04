@@ -2,6 +2,7 @@ package fragments;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +30,8 @@ import com.tritiumlabs.grouper.MyService;
 import com.tritiumlabs.grouper.R;
 import java.util.ArrayList;
 import java.util.List;
+
+import fragments.mainfragments.GroupiesFragment;
 import interfaces.ExternalDB;
 import objects.ExternalDBResponse;
 import retrofit2.Call;
@@ -47,13 +52,18 @@ public class Tracker extends android.support.v4.app.Fragment {
     private GoogleMap googleMap;
     MapView mapView;
 
+    public Tracker.TouchableWrapper mTouchView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Tritium Tracker");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Groupie Map");
         View v = inflater.inflate(R.layout.fragment_map, container, false);
 
         mapView = (MapView) v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+
+        mTouchView = new TouchableWrapper(getActivity());
+        mTouchView.addView(v);
 
         progress = new ProgressDialog(getActivity());
         locationRetriever = LocationRetriever.getInstance(getActivity());
@@ -99,7 +109,6 @@ public class Tracker extends android.support.v4.app.Fragment {
         };
         retrieveLocation.execute();
 
-
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -122,9 +131,7 @@ public class Tracker extends android.support.v4.app.Fragment {
 
         MapsInitializer.initialize(this.getActivity());
 
-
-
-        return v;
+        return mTouchView;
     }
     public void setMapCamera()
     {
@@ -182,6 +189,31 @@ public class Tracker extends android.support.v4.app.Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    public class TouchableWrapper extends FrameLayout {
+
+        public TouchableWrapper(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent event) {
+
+            switch (event.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    GroupiesFragment.disableScroll();
+                    Log.v("Map Holder", "Scroll Disabled");
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    GroupiesFragment.enableScroll();
+                    Log.v("Map Holder", "Scroll Enabled");
+                    break;
+            }
+            return super.dispatchTouchEvent(event);
+        }
     }
 }
 
