@@ -82,6 +82,7 @@ public interface ExternalDB
             @Field("lifespan") int lifespan);
 
     //Buoys in specific area
+    //this will return a LIST OF ExternalDBResponse, CODE ACCORDINGLY -AB
     @FormUrlEncoded
     @POST("nucleus/db/requestBuoysInArea.php")
     Call<List<ExternalDBResponse>> requestLocalBuoys(
@@ -103,8 +104,9 @@ public interface ExternalDB
             @Field("groupieCreationString") String groupieCreationString);
 
     //Groupies in specific area
+    //this will return a LIST OF ExternalDBResponse, CODE ACCORDINGLY -AB
     @FormUrlEncoded
-    @POST("nucleus/db/requestBuoysInArea.php")
+    @POST("nucleus/db/requestGroupiesInArea.php")
     Call<List<ExternalDBResponse>> requestLocalGroupies(
             @Field("longitude") double longitude,
             @Field("latitude") double latitude,
@@ -112,7 +114,7 @@ public interface ExternalDB
 
     //request groupie based on location
     @FormUrlEncoded
-    @POST("nucleus/db/requestBuoysInArea.php")
+    @POST("nucleus/db/requestGroupieByLocation.php")
     Call<List<ExternalDBResponse>> requestGroupieByLocation(
             @Field("longitude") double longitude,
             @Field("latitude") double latitude);
@@ -122,6 +124,13 @@ public interface ExternalDB
     @POST("nucleus/db/requestGroupieByID.php")
     Call<List<ExternalDBResponse>> requestGroupieByID(
             @Field("GroupieID") double groupieID);
+
+    //attend groupie based on groupieID and username
+    @FormUrlEncoded
+    @POST("nucleus/db/attendGroupie.php")
+    Call<List<ExternalDBResponse>> attendGroupie(
+            @Field("GroupieID") String username,
+            @Field("GroupieID") int groupieID);
 
 
     //create profile based on creation string
@@ -138,11 +147,11 @@ public interface ExternalDB
 
     //TODO request profiles based on friendslist -AB
     @FormUrlEncoded
-    @POST("nucleus/db/requestProfile.php")
+    @POST("nucleus/db/requestProfileByFriends.php")
     Call<List<ExternalDBResponse>> requestProfileByFriendslist(
             @Field("username") String username);
 
-    //in theory we can use this to upload any picture
+    //in theory we can use this to upload any picture/file
     @Multipart
     @POST("nucleus/db/uploadPicture.php")
     Call<List<ExternalDBResponse>> uploadProfilePicture (
