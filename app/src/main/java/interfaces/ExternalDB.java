@@ -63,6 +63,7 @@ public interface ExternalDB
             @Field("latitude") double latitude);
 
     //this will place a public Buoy at the specified coords with the specified grid size
+    //public Buoys will only last some arbitrary timespan we should decide
     @FormUrlEncoded
     @POST("nucleus/db/placePublicBuoy.php")
     Call<List<ExternalDBResponse>> placePublicBuoy(
@@ -80,37 +81,66 @@ public interface ExternalDB
             @Field("latitude") double latitude,
             @Field("lifespan") int lifespan);
 
-
-    //i know its a fuck load of info to put into a function and im trying to find a way to make it easier
-
-    /**
+    //Buoys in specific area
     @FormUrlEncoded
-    @POST("nucleus/db/createGroupie.php")
-    Call<List<ExternalDBResponse>> createGroupie(
-            @Field("groupieName") String groupieName,
-            @Field("groupieCreator") String groupieCreator,
-            @Field("groupieDescription") String groupieDescription,
-            //String value should either be Y or N for indicator
-            @Field("groupiePrivateIndicator") String privateIndicator,
-            @Field("groupieStartDate") String groupieStartDate,
-            @Field("groupieStartTime") String username,
-            @Field("groupieEndDate") String groupieEndDate,
-            @Field("groupieEndTime") String groupieEndTime,
-            @Field("groupieLat") double groupieLat,
-            @Field("groupieLong") double groupieLong,
-            @Field("groupieAddress") String groupieAddress);
-    */
+    @POST("nucleus/db/requestBuoysInArea.php")
+    Call<List<ExternalDBResponse>> requestLocalBuoys(
+            @Field("longitude") double longitude,
+            @Field("latitude") double latitude,
+            @Field("gridsize") double gridsize);
+
+    //request buoy by buoy ID
+    @FormUrlEncoded
+    @POST("nucleus/db/requestBuoyByID.php")
+    Call<List<ExternalDBResponse>> requestBuoy(
+            @Field("buoyID") String buoyID);
+
 
     //for more info on this go to the Groupie class comments -AB
     @FormUrlEncoded
-    @POST("nucleus/db/createGroupie.php")
-    Call<List<ExternalDBResponse>> createGroupie(
+    @POST("nucleus/db/createEditGroupie.php")
+    Call<List<ExternalDBResponse>> createEditGroupie(
             @Field("groupieCreationString") String groupieCreationString);
 
+    //Groupies in specific area
+    @FormUrlEncoded
+    @POST("nucleus/db/requestBuoysInArea.php")
+    Call<List<ExternalDBResponse>> requestLocalGroupies(
+            @Field("longitude") double longitude,
+            @Field("latitude") double latitude,
+            @Field("gridsize") double gridsize);
+
+    //request groupie based on location
+    @FormUrlEncoded
+    @POST("nucleus/db/requestBuoysInArea.php")
+    Call<List<ExternalDBResponse>> requestGroupieByLocation(
+            @Field("longitude") double longitude,
+            @Field("latitude") double latitude);
+
+    //request groupie based on groupieID
+    @FormUrlEncoded
+    @POST("nucleus/db/requestGroupieByID.php")
+    Call<List<ExternalDBResponse>> requestGroupieByID(
+            @Field("GroupieID") double groupieID);
+
+
+    //create profile based on creation string
     @FormUrlEncoded
     @POST("nucleus/db/createEditProfile.php")
     Call<List<ExternalDBResponse>> createEditProfile(
             @Field("profileCreationString") String profileCreationString);
+
+    //request profile based on username
+    @FormUrlEncoded
+    @POST("nucleus/db/requestProfile.php")
+    Call<List<ExternalDBResponse>> requestProfile(
+            @Field("username") String username);
+
+    //TODO request profiles based on friendslist -AB
+    @FormUrlEncoded
+    @POST("nucleus/db/requestProfile.php")
+    Call<List<ExternalDBResponse>> requestProfileByFriendslist(
+            @Field("username") String username);
 
     //in theory we can use this to upload any picture
     @Multipart
@@ -122,7 +152,7 @@ public interface ExternalDB
 
     //can use this but wont return anything of use
     @FormUrlEncoded
-    @POST("nucleus/db/uploadProfilePic.php")
+    @POST("nucleus/db/requestPicture.php")
     Call<List<ExternalDBResponse>> requestProfilePicture(
             @Field("username") String username);
 
