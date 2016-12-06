@@ -236,6 +236,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
         );
 
+        //TODO can we please get this to say save? its giving me cancer -AB
         btnSaveInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

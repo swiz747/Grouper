@@ -84,6 +84,8 @@ import static com.tritiumlabs.grouper.MyXMPP.dbHandler;
  * ive got a placeholder method called get groupies and add groupies to map, one
  * actually adds the markers, the other gets groupies from the database
  *
+ * this cant possibly be correct, can it? the skill desparity between "normies" and us cant be this sharp, can it? is there really almost no middle ground between "I can send an email" and "I can create, the programs you use"?
+ *
  */
 
 public class Tracker extends android.support.v4.app.Fragment {
@@ -112,9 +114,12 @@ public class Tracker extends android.support.v4.app.Fragment {
         locationRetriever = new LocationRetriever(getActivity());
         mLocationListener = new LocalLocationListener();
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        //TODO we should for sure change the below arguments to something a bit more reasonable.
+        // currently the location refreshes if its been more than 30 seconds AND the target has moved at least 10 meters
+        //the location will only update if both of those are true
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 10, mLocationListener);
 
-        Log.e("Tracker", "onCreateView: created mapfrag" );
+        Log.d("Tracker", "onCreateView: created mapfrag" );
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -220,17 +225,6 @@ public class Tracker extends android.support.v4.app.Fragment {
         mapView.onLowMemory();
     }
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            // Get extra data included in the Intent
-            Double latitude = intent.getDoubleExtra("latitude", 0.0);
-            Double longitude = intent.getDoubleExtra("longitude", 0.0);
-            String location = "Latitude " + String.valueOf(latitude) + ":" + "Longitude " + String.valueOf(longitude);
-            Log.e("Tracker", "onReceive: " + location);
-        }
-    };
 
     private class LocalLocationListener implements LocationListener
     {
@@ -238,22 +232,22 @@ public class Tracker extends android.support.v4.app.Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            Log.e(TAG, "onLocationChanged: ");
+            Log.d(TAG, "onLocationChanged: ");
         }
 
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-            Log.e(TAG, "onStatusChanged: ");
+            Log.d(TAG, "onStatusChanged: ");
         }
 
         @Override
         public void onProviderEnabled(String s) {
-            Log.e(TAG, "onProviderEnabled: ");
+            Log.d(TAG, "onProviderEnabled: ");
         }
 
         @Override
         public void onProviderDisabled(String s) {
-            Log.e(TAG, "onProviderDisabled: ");
+            Log.d(TAG, "onProviderDisabled: ");
         }
     }
 

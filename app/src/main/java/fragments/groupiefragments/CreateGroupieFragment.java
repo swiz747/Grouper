@@ -74,7 +74,6 @@ public class CreateGroupieFragment extends Fragment {
                     }
                 }
         );
-
         btnCreate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -113,4 +112,14 @@ public class CreateGroupieFragment extends Fragment {
                     + "/" + String.valueOf(year));
         }
     };
+
+    private void uploadGroupie()
+    {
+
+    }
+    private boolean validateInput()
+    {
+        //TODO make sure nothings blank, otherwise complain and have them fill it in -AB
+        return true;
+    }
 }
