@@ -131,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        //TODO this method is deprecated, ive replaced it with the currently supported one -AB
+        //mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener (mDrawerToggle);
         mDrawerToggle.syncState();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,

@@ -1,15 +1,27 @@
 package com.tritiumlabs.grouper;
 
+import android.*;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.google.android.gms.clearcut.LogEventParcelable;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
+import fragments.Tracker;
 
 /**
  * Created by Arthur on 9/28/2016.
@@ -21,14 +33,10 @@ public class LocationRetriever implements
 
     private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
-    public static LocationRetriever instance = null;
-    private String longitude;
-    private String latitude;
-    private String combinedLatLong;
-    private boolean isDataReady = false;
 
-    LocationRetriever(Context context)
-    {
+
+
+    public LocationRetriever(Context context) {
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(context)
                     .addConnectionCallbacks(this)
@@ -40,31 +48,22 @@ public class LocationRetriever implements
 
     }
 
-    public static LocationRetriever getInstance(Context context)
-    {
-        if(instance == null)
-        {
-            instance = new LocationRetriever(context);
-        }
-        return instance;
-    }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        try {
-
+    public void onConnected(@Nullable Bundle bundle)
+    {
+        Log.e("location retriever", "onConnected: connected to location retriever");
+        try
+        {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
-            if (mLastLocation != null)
-            {
-                Log.d("nigga","just got the locations");
-                latitude = Double.toString(mLastLocation.getLatitude());
-                longitude = Double.toString(mLastLocation.getLongitude());
-                isDataReady = true;
-            }
-        } catch (SecurityException e) {
 
         }
+        catch (SecurityException e)
+        {
+            Log.e("location retriever", "some fucking bullshit is happening here: " + e.getMessage());
+        }
+
     }
 
     @Override
@@ -77,31 +76,14 @@ public class LocationRetriever implements
 
     }
 
-    public String getLongitude() {
-
-        return longitude;
-    }
-
-    public String getLatitude() {
-
-        return latitude;
-    }
-
-    public String getCombinedLatLong() {
-        combinedLatLong = getLatitude() +" : "+ getLongitude();
-        return combinedLatLong;
-    }
-    public boolean getIsDataReady()
+    public void onStop()
     {
-        if (isDataReady)
-        {
-            isDataReady = false;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        Log.e("location retriever", "onStop: stopped location retriever" );
+        mGoogleApiClient.disconnect();
     }
+
+
+
+
 }
 
