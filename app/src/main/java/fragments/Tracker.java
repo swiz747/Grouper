@@ -66,7 +66,7 @@ import static com.tritiumlabs.grouper.MyXMPP.dbHandler;
  *
  * to do this we will need to use something called requestLocationUpdates, tehre are a few different versions
  * of this method but ive got it narrowed down a bit it will be one of these two but im leaning
- * heavily towards the first one
+ * heavily towards the second one (I implemented that one)
  *
  * public abstract PendingResult<Status> requestLocationUpdates (GoogleApiClient client, LocationRequest request, PendingIntent callbackIntent)
  *
@@ -74,6 +74,15 @@ import static com.tritiumlabs.grouper.MyXMPP.dbHandler;
  *
  * you can read more about all this complicated wizardry here https://goo.gl/YRn1ac
  *
+ * heres how this works now, google will keep track of the users precise location, however after X time and Y distance moved by the user
+ * it will call a method that will update our database, this means that the database has an inaccuracy factor of +- Y
+ * we might have to account for that later.
+ *
+ * now that ive setup the map being created before we start fucking around with location stuff the stability of the map fragment
+ * is significantly increased
+ *
+ * ive got a placeholder method called get groupies and add groupies to map, one
+ * actually adds the markers, the other gets groupies from the database
  *
  */
 
