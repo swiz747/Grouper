@@ -1,4 +1,4 @@
-package com.tritiumlabs.grouper;
+package objects;
 
 public class ChatMessage {
 

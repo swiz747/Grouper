@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import objects.ChatMessage;
+import objects.Notification;
 //TODO remove the settings table since were using shared preferences -AB
 
 //TODO create group message table because its so different from regular messages

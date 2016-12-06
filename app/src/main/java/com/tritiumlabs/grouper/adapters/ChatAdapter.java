@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tritiumlabs.grouper.R;
-import com.tritiumlabs.grouper.ChatMessage;
+import objects.ChatMessage;
 
 import java.util.ArrayList;
 

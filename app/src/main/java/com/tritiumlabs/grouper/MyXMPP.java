@@ -1,10 +1,8 @@
 package com.tritiumlabs.grouper;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
@@ -43,6 +41,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import objects.ChatMessage;
+import objects.Friend;
+import objects.Notification;
 
 public class MyXMPP {
 

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.tritiumlabs.grouper.MyService;
 import com.tritiumlabs.grouper.MyXMPP;
-import com.tritiumlabs.grouper.Notification;
+import objects.Notification;
 import com.tritiumlabs.grouper.R;
 
 import java.util.ArrayList;

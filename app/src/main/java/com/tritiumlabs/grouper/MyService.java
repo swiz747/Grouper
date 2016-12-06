@@ -14,6 +14,8 @@ import android.util.Log;
 
 import org.jivesoftware.smack.chat.Chat;
 
+import objects.ChatMessage;
+
 /**
  * Created by Arthur on 6/8/2016.
  */

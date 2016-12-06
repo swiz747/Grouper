@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
+import objects.ChatMessage;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -50,7 +52,7 @@ public class NotificationHelper {
 
     }
 
-    public void messageNotificcation(com.tritiumlabs.grouper.ChatMessage chatMessage)
+    public void messageNotificcation(ChatMessage chatMessage)
     {
         Intent i = new Intent(context, com.tritiumlabs.grouper.MainActivity.class);
         i.putExtra("from", chatMessage.getSender());

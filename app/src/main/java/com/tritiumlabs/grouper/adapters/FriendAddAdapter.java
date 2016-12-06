@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tritiumlabs.grouper.R;
-import com.tritiumlabs.grouper.Friend;
+import objects.Friend;
 import com.tritiumlabs.grouper.MyXMPP;
 
 import java.util.ArrayList;

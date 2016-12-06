@@ -23,12 +23,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.tritiumlabs.grouper.Friend;
-import com.tritiumlabs.grouper.LocationInfo;
 import com.tritiumlabs.grouper.LocationRetriever;
-import com.tritiumlabs.grouper.MyService;
 import com.tritiumlabs.grouper.R;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import fragments.mainfragments.GroupiesFragment;

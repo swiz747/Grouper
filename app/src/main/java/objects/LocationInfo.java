@@ -1,4 +1,4 @@
-package com.tritiumlabs.grouper;
+package objects;
 
 import com.google.android.gms.maps.model.LatLng;
 

@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.tritiumlabs.grouper.MyService;
 import com.tritiumlabs.grouper.R;
-import com.tritiumlabs.grouper.Friend;
+import objects.Friend;
 import com.tritiumlabs.grouper.adapters.FriendAddAdapter;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.tritiumlabs.grouper;
+package objects;
 
 /**
  * Created by Arthur on 10/8/2016.

@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.tritiumlabs.grouper.MyService;
 import com.tritiumlabs.grouper.R;
-import com.tritiumlabs.grouper.ChatMessage;
+import objects.ChatMessage;
 import com.tritiumlabs.grouper.LocalDBHandler;
 import com.tritiumlabs.grouper.adapters.ChatAdapter;
 

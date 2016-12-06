@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tritiumlabs.grouper.Friend;
+import objects.Friend;
 import com.tritiumlabs.grouper.R;
 
 import java.util.ArrayList;
