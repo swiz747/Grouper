@@ -409,9 +409,9 @@ public class EditProfileActivity extends AppCompatActivity {
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "type");
 
         ExternalDB dbInterface = ExternalDB.retrofit.create(ExternalDB.class);
-        final Call<List<ExternalDBResponse>> call = dbInterface.uploadProfilePicture(username, type, image);
+        final Call<List<ExternalDBResponse>> uploadPicture = dbInterface.uploadProfilePicture(username, type, image);
 
-        call.enqueue(new Callback<List<ExternalDBResponse>>() {
+        uploadPicture.enqueue(new Callback<List<ExternalDBResponse>>() {
             @Override
             public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
             {
@@ -428,9 +428,34 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t)
             {
-                Log.d("Tracker", t.getMessage());
+                Log.d("editProfile Activity", t.getMessage());
             }
         });
+
+
+        final Call<List<ExternalDBResponse>> uploadInfo = dbInterface.createEditProfile("insert creation string ehre");
+        uploadInfo.enqueue(new Callback<List<ExternalDBResponse>>() {
+            @Override
+            public void onResponse(Call<List<ExternalDBResponse>> call, Response<List<ExternalDBResponse>> response)
+            {
+                Log.d("response: ", response.toString());
+                Log.d("response: ", response.message());
+                Log.d("response: ", (Integer.toString(response.code())));
+
+                Log.d("response: ", response.body().get(0).getMainResponse());
+                Log.d("response: ", response.body().get(0).getResponseCode());
+                Log.d("response: ", response.body().get(0).getResponseMessage());
+                Log.d("response: ", response.body().get(0).getEchoInput());
+            }
+
+            @Override
+            public void onFailure(Call<List<ExternalDBResponse>> call, Throwable t)
+            {
+                Log.d("editProfile Activity", t.getMessage());
+            }
+        });
+
+
     }
 
     private void showDatePicker() {
